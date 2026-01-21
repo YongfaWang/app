@@ -5,28 +5,6 @@
     </t-header>
     <t-content style="flex: 1; min-height: 0;">
       <div style="padding: 15px; height: calc(100% - 30px); display: flex; flex-direction: column;">
-        <!-- <t-form
-          :data="localContent"
-          label-width="120px"
-          layout="vertical"
-          style="height: calc(100% - 64px); overflow-y: scroll"
-        >
-          <t-card
-            v-for="(value1, key1) in Object.getOwnPropertyNames(localContent)"
-            :title="formatName(value1)"
-            :key="key1"
-            hover-shadow
-            style="margin-bottom: 20px"
-          >
-            <t-form-item
-              v-for="(value, key) in localContent[value1]"
-              :key="key"
-              :label="formatName(key)"
-            >
-              <t-input v-model="localContent[value1][key]" />
-            </t-form-item>
-          </t-card>
-        </t-form> -->
         <!-- 表单区域，设置可滚动 -->
         <div style="flex: 1; min-height: 0; overflow-y: auto; margin-bottom: 20px;">
           <t-form :data="localContent" label-width="120px" style="width: 100%; min-width: 800px;">
