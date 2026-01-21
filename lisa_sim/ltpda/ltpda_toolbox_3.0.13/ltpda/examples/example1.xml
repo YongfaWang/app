@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ltpda_object ltpda_version="3.0.13 (R2018a)">
+   <historyRoot>
+      <history UUID="5bc98bce-0209-47fd-9b2b-53d4d75ed232" context="{'ltpda_uoh.addHistory', 'ao.fromTSfcn', 'ao.ao', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#ao#ao#Constructor#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#false#dummy##ltpda" methodInvars="cell(0,0)" objectClass="ao" proctime="1719757026093" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'TSFCN'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x14" type="char">randn(size(t))</val>
+            </param>
+            <param desc="" key="'FS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">10</val>
+            </param>
+            <param desc="" key="'NSECS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'XUNITS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="unit">
+                  <unit exps="[1]" shape="1x1" strs="{'s'}" vals="int8([0])"/>
+               </val>
+            </param>
+            <param desc="" key="'T0'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x27" type="char">1970-01-01 00:00:00.000 UTC</val>
+            </param>
+            <param desc="" key="'TOFFSET'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'DY'" origin="ao.buildplist" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'RAND_STREAM'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" structShape="1x1" type="struct">
+                  <struct structShape="1x1">
+                     <Type shape="1x9" type="char">mt19937ar</Type>
+                     <NumStreams shape="1x1" type="double">1</NumStreams>
+                     <StreamIndex shape="1x1" type="double">1</StreamIndex>
+                     <Substream shape="1x1" type="double">1</Substream>
+                     <Seed shape="1x1" type="double">2092776430</Seed>
+                     <RandnAlg shape="1x8" type="char">Ziggurat</RandnAlg>
+                     <Antithetic shape="1x1" type="double">0</Antithetic>
+                     <FullPrecision shape="1x1" type="double">1</FullPrecision>
+                  </struct>
+               </val>
+            </param>
+            <param desc="" key="'NAME'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'DESCRIPTION'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'TIMESPAN'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'CALLERISMETHOD'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'YUNITS'" origin="ao.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+         </plistUsed>
+      </history>
+      <history UUID="54e7bfa1-c399-4588-a56a-f5b654ebad40" context="{'ltpda_uoh.addHistory', 'ao.lpsd', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#lpsd#ao#Signal Processing#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'a1'}" objectClass="ao" proctime="1719757026266" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'WIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="specwin">
+                  <specwin shape="1x1">
+                     <type shape="1x7">Hanning</type>
+                     <alpha shape="1x1" type="double">0</alpha>
+                     <psll shape="1x1" type="double">31.5</psll>
+                     <rov shape="1x1" type="double">50</rov>
+                     <nenbw shape="1x1" type="double">1.5</nenbw>
+                     <w3db shape="1x1" type="double">1.4381999999999999</w3db>
+                     <flatness shape="1x1" type="double">-1.4236</flatness>
+                     <levelorder shape="0x0" type="double"/>
+                     <skip shape="1x1" type="double">0</skip>
+                     <len shape="1x1" type="double">0</len>
+                  </specwin>
+               </val>
+            </param>
+            <param desc="" key="'PSLL'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">200</val>
+            </param>
+            <param desc="" key="'OLAP'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">50</val>
+            </param>
+            <param desc="" key="{'ORDER', 'N'}" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1</val>
+            </param>
+            <param desc="" key="'DROP WINDOW SAMPLES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="logical">1</val>
+            </param>
+            <param desc="" key="{'TIMES', 'SPLIT'}" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'MASK'" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'KDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">100</val>
+            </param>
+            <param desc="" key="'JDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'LMIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'SCALE'" origin="lpsd" shape="1x11">
+               <val shape="1x3" type="char">PSD</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="5bc98bce-0209-47fd-9b2b-53d4d75ed232"/>
+      </history>
+      <history UUID="bb19e6f2-0ff9-4a8a-97c2-51116e2c85d2" context="{'ltpda_uoh.addHistory', 'ltpda_uoh.setPropertyValue', 'ltpda_uo.setName', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#setName#ltpda_uo#Helper#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'LPSD(a1)'}" objectClass="ao" proctime="1719757026270" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'NAME'" origin="setName/setterFcn" shape="1x1">
+               <val shape="1x2" type="char">a5</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="54e7bfa1-c399-4588-a56a-f5b654ebad40"/>
+      </history>
+      <history UUID="dcb4d98f-bba1-4264-a5b8-8df6854cf68c" context="{'ltpda_uoh.addHistory', 'ao.fromTSfcn', 'ao.ao', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#ao#ao#Constructor#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#false#dummy##ltpda" methodInvars="cell(0,0)" objectClass="ao" proctime="1719757026128" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'TSFCN'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x14" type="char">randn(size(t))</val>
+            </param>
+            <param desc="" key="'FS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">10</val>
+            </param>
+            <param desc="" key="'NSECS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'XUNITS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="unit">
+                  <unit exps="[1]" shape="1x1" strs="{'s'}" vals="int8([0])"/>
+               </val>
+            </param>
+            <param desc="" key="'T0'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x27" type="char">1970-01-01 00:00:00.000 UTC</val>
+            </param>
+            <param desc="" key="'TOFFSET'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'DY'" origin="ao.buildplist" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'RAND_STREAM'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" structShape="1x1" type="struct">
+                  <struct structShape="1x1">
+                     <Type shape="1x9" type="char">mt19937ar</Type>
+                     <NumStreams shape="1x1" type="double">1</NumStreams>
+                     <StreamIndex shape="1x1" type="double">1</StreamIndex>
+                     <Substream shape="1x1" type="double">1</Substream>
+                     <Seed shape="1x1" type="double">2092776434</Seed>
+                     <RandnAlg shape="1x8" type="char">Ziggurat</RandnAlg>
+                     <Antithetic shape="1x1" type="double">0</Antithetic>
+                     <FullPrecision shape="1x1" type="double">1</FullPrecision>
+                  </struct>
+               </val>
+            </param>
+            <param desc="" key="'NAME'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'DESCRIPTION'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'TIMESPAN'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'CALLERISMETHOD'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'YUNITS'" origin="ao.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+         </plistUsed>
+      </history>
+      <history UUID="fb52cb2d-f6b8-4053-856e-984722743ff1" context="{'ltpda_uoh.addHistory', 'ao.lpsd', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#lpsd#ao#Signal Processing#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'a2'}" objectClass="ao" proctime="1719757026318" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'WIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="specwin">
+                  <specwin shape="1x1">
+                     <type shape="1x7">Hanning</type>
+                     <alpha shape="1x1" type="double">0</alpha>
+                     <psll shape="1x1" type="double">31.5</psll>
+                     <rov shape="1x1" type="double">50</rov>
+                     <nenbw shape="1x1" type="double">1.5</nenbw>
+                     <w3db shape="1x1" type="double">1.4381999999999999</w3db>
+                     <flatness shape="1x1" type="double">-1.4236</flatness>
+                     <levelorder shape="0x0" type="double"/>
+                     <skip shape="1x1" type="double">0</skip>
+                     <len shape="1x1" type="double">0</len>
+                  </specwin>
+               </val>
+            </param>
+            <param desc="" key="'PSLL'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">200</val>
+            </param>
+            <param desc="" key="'OLAP'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">50</val>
+            </param>
+            <param desc="" key="{'ORDER', 'N'}" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1</val>
+            </param>
+            <param desc="" key="'DROP WINDOW SAMPLES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="logical">1</val>
+            </param>
+            <param desc="" key="{'TIMES', 'SPLIT'}" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'MASK'" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'KDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">100</val>
+            </param>
+            <param desc="" key="'JDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'LMIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'SCALE'" origin="lpsd" shape="1x11">
+               <val shape="1x3" type="char">PSD</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="dcb4d98f-bba1-4264-a5b8-8df6854cf68c"/>
+      </history>
+      <history UUID="c4f1f4b9-d21a-4f36-87cb-c84d87160a5f" context="{'ltpda_uoh.addHistory', 'ltpda_uoh.setPropertyValue', 'ltpda_uo.setName', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#setName#ltpda_uo#Helper#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'LPSD(a2)'}" objectClass="ao" proctime="1719757026321" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'NAME'" origin="setName/setterFcn" shape="1x1">
+               <val shape="1x2" type="char">a6</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="fb52cb2d-f6b8-4053-856e-984722743ff1"/>
+      </history>
+      <history UUID="018d3380-7680-4524-b4e9-af7ba1bc8a54" context="{'ltpda_uoh.addHistory', 'ao.elementOp/operateSingleObject', 'ao.elementOp', 'ao.plus', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#plus#ao#Arithmetic Operator#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[2 -1 1 -1]#false#dummy##ltpda" methodInvars="{'a5', 'a6'}" objectClass="ao" proctime="1719757026426" shape="1x1">
+         <plistUsed UUID="" shape="1x1"/>
+         <inhists UUID="bb19e6f2-0ff9-4a8a-97c2-51116e2c85d2 c4f1f4b9-d21a-4f36-87cb-c84d87160a5f"/>
+      </history>
+      <history UUID="3c58f492-d129-4bb4-9324-87f654bf3e14" context="{'ltpda_uoh.addHistory', 'ltpda_uoh.setPropertyValue', 'ltpda_uo.setName', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#setName#ltpda_uo#Helper#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'(a5 + a6)'}" objectClass="ao" proctime="1719757026429" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'NAME'" origin="setName/setterFcn" shape="1x1">
+               <val shape="1x2" type="char">a9</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="018d3380-7680-4524-b4e9-af7ba1bc8a54"/>
+      </history>
+      <history UUID="60e0ffb4-98ac-4f35-9a64-fb5eafbbf402" context="{'ltpda_uoh.addHistory', 'ao.fromTSfcn', 'ao.ao', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#ao#ao#Constructor#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#false#dummy##ltpda" methodInvars="cell(0,0)" objectClass="ao" proctime="1719757026159" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'TSFCN'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x14" type="char">randn(size(t))</val>
+            </param>
+            <param desc="" key="'FS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">10</val>
+            </param>
+            <param desc="" key="'NSECS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'XUNITS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="unit">
+                  <unit exps="[1]" shape="1x1" strs="{'s'}" vals="int8([0])"/>
+               </val>
+            </param>
+            <param desc="" key="'T0'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x27" type="char">1970-01-01 00:00:00.000 UTC</val>
+            </param>
+            <param desc="" key="'TOFFSET'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'DY'" origin="ao.buildplist" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'RAND_STREAM'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" structShape="1x1" type="struct">
+                  <struct structShape="1x1">
+                     <Type shape="1x9" type="char">mt19937ar</Type>
+                     <NumStreams shape="1x1" type="double">1</NumStreams>
+                     <StreamIndex shape="1x1" type="double">1</StreamIndex>
+                     <Substream shape="1x1" type="double">1</Substream>
+                     <Seed shape="1x1" type="double">2092776437</Seed>
+                     <RandnAlg shape="1x8" type="char">Ziggurat</RandnAlg>
+                     <Antithetic shape="1x1" type="double">0</Antithetic>
+                     <FullPrecision shape="1x1" type="double">1</FullPrecision>
+                  </struct>
+               </val>
+            </param>
+            <param desc="" key="'NAME'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'DESCRIPTION'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'TIMESPAN'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'CALLERISMETHOD'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'YUNITS'" origin="ao.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+         </plistUsed>
+      </history>
+      <history UUID="83cba387-26db-42d4-9dad-88ea650add2e" context="{'ltpda_uoh.addHistory', 'ao.lpsd', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#lpsd#ao#Signal Processing#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'a3'}" objectClass="ao" proctime="1719757026369" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'WIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="specwin">
+                  <specwin shape="1x1">
+                     <type shape="1x7">Hanning</type>
+                     <alpha shape="1x1" type="double">0</alpha>
+                     <psll shape="1x1" type="double">31.5</psll>
+                     <rov shape="1x1" type="double">50</rov>
+                     <nenbw shape="1x1" type="double">1.5</nenbw>
+                     <w3db shape="1x1" type="double">1.4381999999999999</w3db>
+                     <flatness shape="1x1" type="double">-1.4236</flatness>
+                     <levelorder shape="0x0" type="double"/>
+                     <skip shape="1x1" type="double">0</skip>
+                     <len shape="1x1" type="double">0</len>
+                  </specwin>
+               </val>
+            </param>
+            <param desc="" key="'PSLL'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">200</val>
+            </param>
+            <param desc="" key="'OLAP'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">50</val>
+            </param>
+            <param desc="" key="{'ORDER', 'N'}" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1</val>
+            </param>
+            <param desc="" key="'DROP WINDOW SAMPLES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="logical">1</val>
+            </param>
+            <param desc="" key="{'TIMES', 'SPLIT'}" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'MASK'" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'KDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">100</val>
+            </param>
+            <param desc="" key="'JDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'LMIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'SCALE'" origin="lpsd" shape="1x11">
+               <val shape="1x3" type="char">PSD</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="60e0ffb4-98ac-4f35-9a64-fb5eafbbf402"/>
+      </history>
+      <history UUID="d349e0f5-a94b-403d-bdba-652b8a2b859f" context="{'ltpda_uoh.addHistory', 'ao.elementOp/operateSingleObject', 'ao.elementOp', 'ao.times', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#times#ao#Arithmetic Operator#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[2 -1 1 -1]#false#dummy##ltpda" methodInvars="{'a9', 'LPSD(a3)'}" objectClass="ao" proctime="1719757026856" shape="1x1">
+         <plistUsed UUID="" shape="1x1"/>
+         <inhists UUID="3c58f492-d129-4bb4-9324-87f654bf3e14 83cba387-26db-42d4-9dad-88ea650add2e"/>
+      </history>
+      <history UUID="81ac6196-2528-4778-98a4-df7e817d1aae" context="{'ltpda_uoh.addHistory', 'ao.fromTSfcn', 'ao.ao', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#ao#ao#Constructor#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#false#dummy##ltpda" methodInvars="cell(0,0)" objectClass="ao" proctime="1719757026191" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'TSFCN'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x14" type="char">randn(size(t))</val>
+            </param>
+            <param desc="" key="'FS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">10</val>
+            </param>
+            <param desc="" key="'NSECS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'XUNITS'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="unit">
+                  <unit exps="[1]" shape="1x1" strs="{'s'}" vals="int8([0])"/>
+               </val>
+            </param>
+            <param desc="" key="'T0'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x27" type="char">1970-01-01 00:00:00.000 UTC</val>
+            </param>
+            <param desc="" key="'TOFFSET'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'DY'" origin="ao.buildplist" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'RAND_STREAM'" origin="ao.buildplist" shape="1x13">
+               <val shape="1x1" structShape="1x1" type="struct">
+                  <struct structShape="1x1">
+                     <Type shape="1x9" type="char">mt19937ar</Type>
+                     <NumStreams shape="1x1" type="double">1</NumStreams>
+                     <StreamIndex shape="1x1" type="double">1</StreamIndex>
+                     <Substream shape="1x1" type="double">1</Substream>
+                     <Seed shape="1x1" type="double">2092776440</Seed>
+                     <RandnAlg shape="1x8" type="char">Ziggurat</RandnAlg>
+                     <Antithetic shape="1x1" type="double">0</Antithetic>
+                     <FullPrecision shape="1x1" type="double">1</FullPrecision>
+                  </struct>
+               </val>
+            </param>
+            <param desc="" key="'NAME'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'DESCRIPTION'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="char"/>
+            </param>
+            <param desc="" key="'TIMESPAN'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'CALLERISMETHOD'" origin="ltpda_uoh.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'YUNITS'" origin="ao.addGlobalKeys" shape="1x13">
+               <val shape="0x0" type="double"/>
+            </param>
+         </plistUsed>
+      </history>
+      <history UUID="9d6c0180-fdf6-447f-9425-c8efacfaae86" context="{'ltpda_uoh.addHistory', 'ao.lpsd', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#lpsd#ao#Signal Processing#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[1 -1 1 -1]#true#dummy##ltpda" methodInvars="{'a4'}" objectClass="ao" proctime="1719757026416" shape="1x1">
+         <plistUsed UUID="" shape="1x1">
+            <param desc="" key="'WIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="specwin">
+                  <specwin shape="1x1">
+                     <type shape="1x7">Hanning</type>
+                     <alpha shape="1x1" type="double">0</alpha>
+                     <psll shape="1x1" type="double">31.5</psll>
+                     <rov shape="1x1" type="double">50</rov>
+                     <nenbw shape="1x1" type="double">1.5</nenbw>
+                     <w3db shape="1x1" type="double">1.4381999999999999</w3db>
+                     <flatness shape="1x1" type="double">-1.4236</flatness>
+                     <levelorder shape="0x0" type="double"/>
+                     <skip shape="1x1" type="double">0</skip>
+                     <len shape="1x1" type="double">0</len>
+                  </specwin>
+               </val>
+            </param>
+            <param desc="" key="'PSLL'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">200</val>
+            </param>
+            <param desc="" key="'OLAP'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">50</val>
+            </param>
+            <param desc="" key="{'ORDER', 'N'}" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1</val>
+            </param>
+            <param desc="" key="'DROP WINDOW SAMPLES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="logical">1</val>
+            </param>
+            <param desc="" key="{'TIMES', 'SPLIT'}" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'MASK'" origin="lpsd" shape="1x11">
+               <val shape="0x0" type="double"/>
+            </param>
+            <param desc="" key="'KDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">100</val>
+            </param>
+            <param desc="" key="'JDES'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">1000</val>
+            </param>
+            <param desc="" key="'LMIN'" origin="lpsd" shape="1x11">
+               <val shape="1x1" type="double">0</val>
+            </param>
+            <param desc="" key="'SCALE'" origin="lpsd" shape="1x11">
+               <val shape="1x3" type="char">PSD</val>
+            </param>
+         </plistUsed>
+         <inhists UUID="81ac6196-2528-4778-98a4-df7e817d1aae"/>
+      </history>
+      <history UUID="a68c0b74-054c-42d2-b504-8961eb83a22c" context="{'ltpda_uoh.addHistory', 'ao.elementOp/operateSingleObject', 'ao.elementOp', 'ao.times', 'example_1'}" creator="#david#127.0.1.1#david-Shangqi-X4270#GLNXA64#9.4 (R2018a)#8.0 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#8.1 (R2018a)#10.4 (R2018a)#3.0.13 (R2018a)#dummy" methodInfo="#times#ao#Arithmetic Operator#126f494b812cdcbe0447e8f664fa44f6d2b745ca#[2 -1 1 -1]#false#dummy##ltpda" methodInvars="{'(a9 .* LPSD(a3))', 'LPSD(a4)'}" objectClass="ao" proctime="1719757026860" shape="1x1">
+         <plistUsed UUID="" shape="1x1"/>
+         <inhists UUID="d349e0f5-a94b-403d-bdba-652b8a2b859f 9d6c0180-fdf6-447f-9425-c8efacfaae86"/>
+      </history>
+   </historyRoot>
+   <ao UUID="a68c0b74-054c-42d2-b504-8961eb83a22c" shape="1x1">
+      <name shape="1x30">((a9 .* LPSD(a3)) .* LPSD(a4))</name>
+      <hist hist_UUID="a68c0b74-054c-42d2-b504-8961eb83a22c"/>
+      <data>
+         <fsdata shape="1x1">
+            <yaxis name="y">
+               <data shape="154x1" type="double">0.0011752792215712108 0.032666821278193169 0.017140423220728365 0.0056857414557905852 0.0034859749780667528 0.011063915976483204 0.013133748804542265 0.025040521543259687 0.019250480351153777 0.005018385317224673 0.0073341210847042704 0.015154611628039313 0.015573163783971227 0.012322371494224276 0.024896020069044317 0.030446876649348118 0.0058214886553381185 0.013390949797224039 0.0126198634157754 0.013746455952393417 0.014704981396178278 0.016649242539366733 0.012100570818484764 0.011016487216799447 0.017454988555668946 0.017276598329835399 0.015815140930059386 0.016874683375664567 0.012150490727195444 0.015519524258617192 0.022577957103933885 0.013706022767359783 0.011951470148025414 0.016322926774908691 0.017117318312159232 0.0093936930740739309 0.015602399088035538 0.019370055012654718 0.021604997320210751 0.019084894453635929 0.016353935521610415 0.011439170812071043 0.013687546304758567 0.016425914403685304 0.014074036760965056 0.016397321570050048 0.021498663890259662 0.01638132107301082 0.016477709165035964 0.013642997101054034 0.023428613773993183 0.022150061932750102 0.021130817321584772 0.014984531121751306 0.023030979055763231 0.018959299132020761 0.01427799269881549 0.012277130644094185 0.0096965265825918572 0.013606271285324538 0.012326769133056067 0.014672756170351199 0.020849514678866757 0.015392623243002205 0.014262904337316924 0.011466429174049846 0.011466889397172159 0.01316033559354437 0.016874303068581186 0.019796557166312817 0.018118753659879441 0.019966977169353584 0.018888970663906268 0.01714047257909574 0.013736690326045135 0.012362708227516402 0.017900824734524378 0.022470316287306214 0.019033847727361376 0.018404958274193927 0.019227143075497853 0.015636612527219377 0.013793839396271204 0.011979648711511755 0.012499521427865652 0.01660231122756891 0.015856050246046076 0.015458598821603746 0.025780462630004001 0.018881204509684949 0.015258786916285405 0.015576403362633599 0.0114532646089289 0.011084727776586501 0.014628488315485052 0.016325331834435044 0.016224356589441682 0.011934784283050578 0.013814089153239747 0.018352314300811121 0.014761566517986227 0.014978909224395563 0.012771082638414167 0.011091336327996247 0.016561500981341348 0.01484931879185092 0.014171114539496524 0.017991982723043039 0.015133230128361394 0.01786316380246715 0.013270321864101715 0.016742008003030322 0.011385602769831056 0.01439716955288581 0.021103402863900646 0.023575769856115234 0.017228227186255919 0.013644758116457475 0.013131659324435706 0.012599713436294067 0.01201243982217882 0.01550054280738772 0.015358438242601391 0.014220577283447463 0.01436416594493934 0.011915605141515458 0.01241151166771237 0.014840589437578339 0.013547598750754493 0.014462266274236862 0.014032769229855397 0.012263039643930556 0.014482516167232057 0.01363331406695271 0.014482406948218948 0.014127998685281813 0.015863882155251925 0.017386602947173924 0.015145363696696156 0.015076522383827123 0.016344346366396232 0.015217138161049417 0.01851082945001568 0.018747237624365878 0.017980866969107036 0.015536500919828255 0.016631193513340168 0.016095033972867358 0.0155055139782384 0.020247300169309042 0.016741329738003383 0.014025793740312693 0.014857836952997496 0.023223782261455866</data>
+               <ddata shape="154x1" type="double">0.0026464005797390997 0.07315919514870467 0 0.0034069165318752269 0.0015255935335185872 0.0051913047629998594 0.0040571277748509436 0.012359523666262858 0.010974414706728761 0.0017491795968273009 0.0035570301150495477 0.0063994934313805051 0.0081660322353561392 0.006257218842860999 0.0085028800452848965 0.011758419092208624 0.0020287498897481014 0.00404758300949615 0.0046481469199040797 0.0059705603551766405 0.0063164319371924295 0.0072714637880069979 0.0043795510257919603 0.003932354553104268 0.0069277297811241667 0.0056640708855070282 0.0043743874295451958 0.0064228934594046808 0.0035751837976747145 0.0045305273431027228 0.0068926794513811066 0.0043187917001484824 0.0034208689833992263 0.0040239278074497521 0.0041116822733939717 0.0026691105219594012 0.0047505479272782151 0.0051714593090954886 0.0056107651210395128 0.0063518306276560072 0.0047485396729832364 0.0026404976365850142 0.0032076334279288934 0.0040658768002662452 0.0035771560713974914 0.0042484717046687506 0.0057432626079156734 0.0038203947947344713 0.0037777808573988981 0.0037175991671462259 0.0056556792253810509 0.0050065124288735125 0.0046234543793131893 0.0038936043409828311 0.0057779277414616286 0.0050844915930964357 0.0032272071081250603 0.0025117546666799644 0.0021813008208260046 0.0029584227817986888 0.0028540778245144793 0.0029797537837164441 0.0042482467172461832 0.0032604562071508309 0.0032535217251582526 0.0027882228643109617 0.0024826765543077838 0.002781372547707224 0.0035191404264777325 0.004267225788347621 0.0040001851246010082 0.0039687480294381249 0.0038633061087940648 0.0034502383064649567 0.0026928165597879181 0.0022464340460810256 0.0035144814839072453 0.0045749573521583504 0.0038836605226995075 0.0035252179898335899 0.0032886301965939584 0.0029347255220747276 0.002676646004888544 0.0021029406302603823 0.0021757982766340638 0.0030412821558870925 0.0029124838095496756 0.0027679825078555766 0.0048755979662375576 0.0033106101791249929 0.0023803640955329412 0.0028445552222172549 0.0021956391930217554 0.0021946472646588115 0.0024229549143852842 0.0027312033542023551 0.0026718686227135257 0.0022068215112052226 0.0024306429012610404 0.0033494575927060315 0.0027060111517773571 0.0026168823618488803 0.002076214510631654 0.0018934864187661118 0.0029011399053659238 0.0026039388678686039 0.0022373911836049811 0.002950921709129359 0.0024376940536939796 0.0029925722673190581 0.0024154636919678334 0.0028531765604723688 0.001851854952644879 0.0024558434096310601 0.0038888958327754162 0.0034956791233842501 0.0026471923412736444 0.0023400539463853173 0.0020445502294577254 0.0019067460289633276 0.0019032264494187525 0.0023997824595889013 0.0023486210131607888 0.0021687671306420422 0.0022051112919990318 0.0019570547032306046 0.0018536767136238621 0.0020160968496447458 0.0020081666868911113 0.0019831897093498707 0.0022052029150001098 0.0019178006837804616 0.0021972688405316582 0.0019481802211166186 0.0020779438612013642 0.0020246312615797724 0.0021649311223666009 0.0026497494534406512 0.0023875461277595884 0.0023704623597551409 0.0022710655475230413 0.0022508962171793705 0.0026358042970921381 0.0027283576129215124 0.0025492996486855073 0.0021140024517108057 0.0022509565639901885 0.0023893596014588174 0.0022678857570212815 0.0028189650611308657 0.0026014336107221376 0.001982233780036455 0.0020577941081630024 0.004261290800928518</ddata>
+               <units>
+                  <unit exps="[-1 -1 -1]" shape="1x1" strs="{'Hz', 'Hz', 'Hz'}" vals="int8([0 0 0])"/>
+               </units>
+            </yaxis>
+            <xaxis name="x">
+               <data shape="154x1" type="double">0.001 0.002 0.0030000000000000001 0.0045979546180888462 0.0065761939850522491 0.0089419380115485815 0.011700558701203755 0.014856128281513 0.018412316048227084 0.022371144235083774 0.026734145980284472 0.031505138346696687 0.03668380225140927 0.042270394430180221 0.048269194670132229 0.054679451080388637 0.061500733481480045 0.068736623495951832 0.076387732906816413 0.084452249035848664 0.09292682530703511 0.10182362246006002 0.11113460942467827 0.12086223588382225 0.13100422371343684 0.14156388580424994 0.15254083421259243 0.16393035585268353 0.17573673129542261 0.18796167017072823 0.20060389520233379 0.2136757906271704 0.22715287957595748 0.24106108541740393 0.25538773298187384 0.27013699551874698 0.28531150234727504 0.30088782633481398 0.31688782633481399 0.33330818758276143 0.35014320441777824 0.36741436158530849 0.38511347662955631 0.40322941865854184 0.42174793717706038 0.44068733111645431 0.4600671760776946 0.47986915627571441 0.50007117647773458 0.52068973317876555 0.54174236475771287 0.56320159222552402 0.58508343029992227 0.60740485887135087 0.63013213159862358 0.65328027974677172 0.67686518540714913 0.70084600075487091 0.72529587850548216 0.75017150039602942 0.77542402564855473 0.80113096652259075 0.8272406270970033 0.85376582603599538 0.88072000393356953 0.90811726420754213 0.93589504198531992 0.96414362955594135 0.99279692468488123 1.0218666921267416 1.0513652172004879 1.0813053369609669 1.1116083672639971 1.142377598033228 1.1735302460083059 1.205175815628559 1.237227097679841 1.2696946301473735 1.3025893669894788 1.3359227003228122 1.369592733992846 1.4037224268256105 1.4383245029501781 1.4732895379152131 1.5087505308230145 1.5445928247298244 1.5808247087877954 1.6174547454178321 1.6544917824548691 1.6920857674172751 1.729964555296063 1.7682787315412738 1.8070384214637545 1.8462541077382644 1.8859366474208041 1.9259366474208042 1.9664224773803183 2.0074060839376955 2.0487283979872823 2.0905694021713828 2.1327634949983869 2.1753166864877485 2.2184201347636106 2.261898395633176 2.3057580447559829 2.3500058323666022 2.3946486895094594 2.4396937345545044 2.4853558350111253 2.5314387843198811 2.5779504122268579 2.6248987690343695 2.6720685803551243 2.7196876279741717 2.7677645510510946 2.816308240371483 2.8653278482146201 2.9148327987096696 2.9645840424907641 3.0148352987721712 3.065596720091968 3.1166171282552333 3.1681635200078104 3.2199769915104013 3.2723330124528096 3.3252430653628626 3.3784345547245649 3.4321979955847799 3.4862520496388338 3.5405998757257904 3.5955449306708451 3.6507935494553756 3.7066594712430851 3.7628392465239839 3.819336421665227 3.876479278808084 3.9339505431759001 3.9917540113839927 4.0498935462677137 4.1087170756794782 4.1678886733126141 4.2274124828364235 4.2872927223573818 4.3475336862128033 4.4085092959689005 4.4698589892204339 4.5315873842821626 4.5936991855243985 4.6561991855243985 4.7190922672854052 4.7823834065259119 4.8460776740418359 4.9101802381443997 4.9746963671766578</data>
+               <ddata shape="0x0" type="double"/>
+               <units>
+                  <unit exps="[1]" shape="1x1" strs="{'Hz'}" vals="int8([0])"/>
+               </units>
+            </xaxis>
+            <t0>
+               <time shape="1x1" utc_epoch_milli="0 "/>
+            </t0>
+            <fs shape="1x1" type="double">10</fs>
+            <navs shape="1x1" type="double">NaN</navs>
+            <enbw shape="154x1" type="double">0.0014999999999999911 0.0014999999999999911 0.0023969319271332726 0.0029673590504451014 0.0035486160397444956 0.00413793103448279 0.0047333543704638483 0.0053342816500711321 0.0059382422802850545 0.0065445026178010367 0.0071564885496183525 0.0077679958570688974 0.0083798882681564331 0.0089982003599279829 0.0096153846153846315 0.010231923601637129 0.010853835021707656 0.011476664116296855 0.012096774193548373 0.012711864406779684 0.013345195729537317 0.013966480446927367 0.01459143968871599 0.015212981744421906 0.015839493136219612 0.016465422612513742 0.017084282460136685 0.017709563164108634 0.018337408312958429 0.018963337547408327 0.019607843137254832 0.020215633423180605 0.020862308762169688 0.021489971346704849 0.022123893805309752 0.022761760242792084 0.023364485981308393 0.024 0.024630541871921187 0.025252525252525203 0.0259067357512953 0.026548672566371723 0.027173913043478302 0.02777777777777771 0.028409090909090867 0.02906976744186052 0.029702970297029698 0.030303030303030356 0.030927835051546455 0.031578947368421074 0.032188841201716736 0.03282275711159735 0.033482142857142891 0.034090909090909075 0.034722222222222217 0.035377358490566072 0.035971223021582698 0.036674816625916914 0.037313432835820906 0.037878787878787921 0.038560411311053915 0.0391644908616188 0.039787798408488131 0.040431266846361211 0.041095890410958916 0.041666666666666692 0.042372881355932202 0.042979942693409781 0.043604651162790692 0.044247787610619461 0.044910179640718639 0.0454545454545454 0.046153846153846073 0.0467289719626168 0.047468354430379764 0.048076923076923128 0.048701298701298676 0.049342105263157882 0.049999999999999933 0.050505050505050511 0.051194539249146694 0.051903114186851181 0.05244755244755242 0.053191489361702218 0.053763440860215034 0.054347826086956492 0.054945054945054986 0.055555555555555608 0.056390977443609054 0.056818181818181782 0.05747126436781614 0.058139534883720867 0.058823529411764691 0.059523809523809507 0.059999999999999963 0.060728744939271176 0.061475409836065538 0.061983471074380202 0.062761506276150708 0.063291139240506306 0.063829787234042534 0.064655172413793052 0.065217391304347866 0.065789473684210523 0.066371681415929182 0.066964285714285657 0.067567567567567544 0.068493150684931572 0.069124423963133647 0.069767441860465088 0.070422535211267609 0.070754716981132115 0.071428571428571369 0.072115384615384595 0.072815533980582506 0.073529411764705829 0.074257425742574143 0.074626865671641743 0.075376884422110491 0.076142131979695479 0.076530612244897864 0.077319587628865941 0.077720207253886009 0.078534031413612565 0.079365079365079347 0.079787234042553196 0.080645161290322689 0.081081081081081086 0.081521739130434839 0.082417582417582388 0.082872928176795521 0.083798882681564421 0.084269662921348271 0.084745762711864528 0.085714285714285715 0.086206896551724144 0.086705202312138657 0.087209302325581273 0.088235294117647162 0.088757396449704221 0.089285714285714204 0.089820359281437154 0.090361445783132446 0.091463414634146395 0.092024539877300582 0.092592592592592518 0.093167701863354019 0.093750000000000014 0.094339622641509482 0.094936708860759472 0.095541401273885274 0.096153846153846201 0.096774193548387233 0.097402597402597393</enbw>
+         </fsdata>
+      </data>
+   </ao>
+</ltpda_object>

@@ -1,0 +1,42 @@
+//
+// LISA Constants {{ version }}
+//
+// Provides values sanctioned by the LISA Consortium for physical constants and mission parameters.
+//
+// Authors:
+//    Jean-Baptiste Bayle <j2b.bayle@gmail.com>
+//    Aurelien Hees <aurelien.hees@obspm.fr>
+//    Maude Lejeune <lejeune@apc.in2p3.fr>
+//
+
+#ifndef LISACONSTANTS_HPP
+#define LISACONSTANTS_HPP
+#pragma once
+
+#define LISACONSTANT_VERSION="{{ version }}"
+
+namespace LisaConstants {
+
+    class Constants {
+    public:
+{% for name, constant in constants.items() %}
+        /**
+        {{ constant.description }}
+
+        Unit: {{ constant.unit }}.
+        Error: {{ constant.error }}.
+
+        References:
+{%- for reference in constant.references %}
+          - {{ reference }}
+{%- else %}
+          No reference available
+{%- endfor %}
+        **/
+        static constexpr double {{ name }} = {{ constant.value }};
+{% endfor %}
+    };
+
+}
+
+#endif

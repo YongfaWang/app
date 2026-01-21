@@ -1,0 +1,22 @@
+<RCC>
+  <qresource>
+    <file>resources/icons/Glitches.png</file>
+    <file>resources/icons/Glitches_hover.png</file>
+    <file>resources/icons/Glitches_pressed.png</file>
+    <file>resources/icons/h5_viewer.png</file>
+    <file>resources/icons/GW_Response.png</file>
+    <file>resources/icons/GW_Response_hover.png</file>
+    <file>resources/icons/GW_Response_pressed.png</file>
+    <file>resources/icons/h5_viewer_hover.png</file>
+    <file>resources/icons/h5_viewer_pressed.png</file>
+    <file>resources/icons/Orbits.png</file>
+    <file>resources/icons/Orbits_hover.png</file>
+    <file>resources/icons/Orbits_pressed.png</file>
+    <file>./resources/icons/Ground_tracking_100.png</file>
+    <file>./resources/icons/Ground_tracking_hover_100.png</file>
+    <file>resources/icons/Instrument.png</file>
+    <file>resources/icons/Instrument_hover.png</file>
+    <file>resources/icons/Instrument_pressed.png</file>
+    <file>./resources/icons/Ground_tracking_pressed_100.png</file>
+  </qresource>
+</RCC>

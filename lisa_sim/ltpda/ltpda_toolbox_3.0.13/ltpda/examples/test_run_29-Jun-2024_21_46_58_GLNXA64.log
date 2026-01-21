@@ -1,0 +1,129 @@
+% Test run 
+%  
+% Started  29-Jun-2024_21:42:49
+% Finished 29-Jun-2024_21:46:58
+%  
+%  
+% writen by run_tests / $Id$ 
+%  
+%  108 tests run
+%  107 tests passed
+%  1 tests failed
+% 
+% Tests run on GLNXA64 with version 3.0.13 of LTPDA
+% 
+% 
+% Test No  | Test | Execution time [s] | pass/fail 
+
+
+001   ao_class_test             001.09   pass
+002   example_1                 005.27   pass
+003   example_2                 002.04   pass
+004   test_abs                  000.84   pass
+005   test_ao_1                 000.63   pass
+006   test_ao_split             001.77   pass
+007   test_ao_tsfcn             000.40   pass
+008   test_conj                 000.50   pass
+009   test_ctranspose           000.43   pass
+010   test_det                  000.42   pass
+011   test_diag                 000.40   pass
+012   test_eig                  000.46   pass
+013   test_fft                  001.87   pass
+014   test_iir_filtering        001.04   pass
+015   test_inv                  000.40   pass
+016   test_lincom_cdata         001.05   pass
+017   test_lpsd                 006.09   pass
+018   test_ltpda_cohere         001.39   pass
+019   test_ltpda_cpsd           001.35   pass
+020   test_ltpda_lincom         000.96   pass
+021   test_ltpda_polydetrend    001.99   pass
+022   test_ltpda_pwelch         001.35   pass
+023   test_ltpda_tfe            001.20   pass
+024   test_mean                 000.86   pass
+025   test_miir_class           000.72   pass
+026   test_miir_filter          001.67   pass
+027   test_miir_filtfilt        001.56   pass
+028   test_miir_redesign        000.87   pass
+029   test_norm                 000.41   pass
+030   test_plist_string         000.04   pass
+031   test_minus                000.85   pass
+032   test_mpower               000.77   pass
+033   test_times                000.85   pass
+034   test_rdivide              000.83   pass
+035   test_plus                 000.84   pass
+036   test_pzmodel_class        002.05   pass
+037   test_recreate_1           001.42   pass
+038   test_resample             000.75   pass
+039   test_simulated_data       000.38   pass
+040   test_svd                  000.43   pass
+041   test_transpose            000.37   pass
+042   test_xml_complex          001.16   pass
+043   testing_xml               001.60   pass
+044   test_fir_filter           001.56   pass
+045   test_mfir_class           002.12   pass
+046   test_ao_split_frequency   000.86   pass
+047   test_ao_downsample        000.87   pass
+048   test_ao_find              001.40   pass
+049   test_ao_select            001.27   pass
+050   test_ltpda_linedetect     001.12   pass
+051   test_ltpda_nfest          000.86   pass
+052   test_ao_waveform          000.75   pass
+053   test_filter_edges         000.52   pass
+054   test_ltpda_ltfe           001.70   pass
+055   test_sin                  000.19   pass
+056   test_asin                 000.17   pass
+057   test_cos                  000.14   pass
+058   test_acos                 000.17   pass
+059   test_tan                  000.14   pass
+060   test_atan                 000.14   pass
+061   test_ao_hist              002.63   pass
+062   test_log_ln               000.20   pass
+063   test_log10                000.14   pass
+064   test_exp                  000.13   pass
+065   test_sqrt                 000.13   pass
+066   test_median               000.18   pass
+067   test_std                  000.17   pass
+068   test_var                  000.18   pass
+069   test_ao_join_ts           000.66   pass
+070   test_ao_polyfit           003.94   pass
+071   test_ao_interp            001.00   pass
+072   test_ltpda_xcorr          001.03   pass
+073   test_pzm_to_fir           000.69   pass
+074   test_ao_spikecleaning     001.93   pass
+075   test_ao_gapfilling        002.16   pass
+076   test_ao_freq_series       000.80   pass
+077   test_ao_upsample          000.91   pass
+078   test_iplot                035.32   pass
+079   test_iplot_2              022.20   pass
+080   test_ao_pwelch            000.96   pass
+081   test_ao_tfe               001.47   pass
+082   test_ao_cohere            000.98   pass
+083   test_ao_cpsd              001.71   pass
+084   test_ao_cov               000.24   pass
+085   test_ao_fromVals          000.17   pass
+086   test_ao_lincom            005.45   pass
+087   test_ao_xfit              007.92   pass
+088   test_ao_bilinfit          003.48   pass
+089   test_ao_linedetect        000.53   pass
+090   test_ao_heterodyne        002.02   pass
+091   test_ao_linfit            006.97   pass
+092   test_ao_lscov             001.68   pass
+093   test_ao_rotate            000.58   pass
+094   test_ao_timeaverage       000.23   pass
+095   test_LTPDAprefs_cl_set    000.19   pass
+096   test_smodel_double        004.62   pass
+097   test_smodel_eval          000.26   pass
+098   test_ao_fftfilt           011.17   pass
+099   test_ao_removeVal         001.26   pass
+100   test_ao_consolidate       001.38   pass
+101   test_tsdata_class         000.04   pass
+102   test_ao_plot              022.94   pass
+103   test_collection_history   000.74   pass
+104   test_collection_plot      005.35   pass
+105   test_matrix_plot          015.75   pass
+106   test_isequal              000.64   fail    Error message: Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('sym>convertChar', '/home/david/MySoft/MATLAB/R2018a/toolbox/symbolic/symbolic/@sym/sym.m', 1448)" style="font-weight:bold">sym>convertChar</a> (<a href="matlab: opentoline('/home/david/MySoft/MATLAB/R2018a/toolbox/symbolic/symbolic/@sym/sym.m',1448,0)">line 1448</a>)  Character vectors and strings in the first argument can only specify a variable or number. To evaluate character vectors and strings representing symbolic expressions, use 'str2sym'.
+107   test_iplot_3              008.11   pass
+108   test_ao_detrend           002.05   pass
+
+
+% END 

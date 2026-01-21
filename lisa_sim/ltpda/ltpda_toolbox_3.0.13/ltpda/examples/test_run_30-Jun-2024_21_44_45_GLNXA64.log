@@ -1,0 +1,129 @@
+% Test run 
+%  
+% Started  30-Jun-2024_21:44:44
+% Finished 30-Jun-2024_21:44:45
+%  
+%  
+% writen by run_tests / $Id$ 
+%  
+%  108 tests run
+%  0 tests passed
+%  108 tests failed
+% 
+% Tests run on GLNXA64 with version 3.0.13 of LTPDA
+% 
+% 
+% Test No  | Test | Execution time [s] | pass/fail 
+
+
+001   ao_class_test             000.18   fail    Error message: Dot indexing is not supported for variables of this type.
+002   example_1                 000.09   fail    Error message: Dot indexing is not supported for variables of this type.
+003   example_2                 000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+004   test_abs                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+005   test_ao_1                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+006   test_ao_split             000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+007   test_ao_tsfcn             000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+008   test_conj                 000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+009   test_ctranspose           000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+010   test_det                  000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+011   test_diag                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+012   test_eig                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+013   test_fft                  000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+014   test_iir_filtering        000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+015   test_inv                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+016   test_lincom_cdata         000.02   fail    Error message: Dot indexing is not supported for variables of this type.
+017   test_lpsd                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+018   test_ltpda_cohere         000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+019   test_ltpda_cpsd           000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+020   test_ltpda_lincom         000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+021   test_ltpda_polydetrend    000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+022   test_ltpda_pwelch         000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+023   test_ltpda_tfe            000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+024   test_mean                 000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+025   test_miir_class           000.07   fail    Error message: Dot indexing is not supported for variables of this type.
+026   test_miir_filter          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+027   test_miir_filtfilt        000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+028   test_miir_redesign        000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+029   test_norm                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+030   test_plist_string         000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+031   test_minus                000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+032   test_mpower               000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+033   test_times                000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+034   test_rdivide              000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+035   test_plus                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+036   test_pzmodel_class        000.06   fail    Error message: Dot indexing is not supported for variables of this type.
+037   test_recreate_1           000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+038   test_resample             000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+039   test_simulated_data       000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+040   test_svd                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+041   test_transpose            000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+042   test_xml_complex          000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+043   testing_xml               000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+044   test_fir_filter           000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+045   test_mfir_class           000.04   fail    Error message: Dot indexing is not supported for variables of this type.
+046   test_ao_split_frequency   000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+047   test_ao_downsample        000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+048   test_ao_find              000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+049   test_ao_select            000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+050   test_ltpda_linedetect     000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+051   test_ltpda_nfest          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+052   test_ao_waveform          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+053   test_filter_edges         000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+054   test_ltpda_ltfe           000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+055   test_sin                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+056   test_asin                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+057   test_cos                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+058   test_acos                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+059   test_tan                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+060   test_atan                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+061   test_ao_hist              000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+062   test_log_ln               000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+063   test_log10                000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+064   test_exp                  000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+065   test_sqrt                 000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+066   test_median               000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+067   test_std                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+068   test_var                  000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+069   test_ao_join_ts           000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+070   test_ao_polyfit           000.02   fail    Error message: Dot indexing is not supported for variables of this type.
+071   test_ao_interp            000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+072   test_ltpda_xcorr          000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+073   test_pzm_to_fir           000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+074   test_ao_spikecleaning     000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+075   test_ao_gapfilling        000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+076   test_ao_freq_series       000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+077   test_ao_upsample          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+078   test_iplot                000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+079   test_iplot_2              000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+080   test_ao_pwelch            000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+081   test_ao_tfe               000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+082   test_ao_cohere            000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+083   test_ao_cpsd              000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+084   test_ao_cov               000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+085   test_ao_fromVals          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+086   test_ao_lincom            000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+087   test_ao_xfit              000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+088   test_ao_bilinfit          000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+089   test_ao_linedetect        000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+090   test_ao_heterodyne        000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+091   test_ao_linfit            000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+092   test_ao_lscov             000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+093   test_ao_rotate            000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+094   test_ao_timeaverage       000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+095   test_LTPDAprefs_cl_set    000.04   fail    Error message: Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LTPDAprefs/getPreferences', '/home/david/MySoft/lisa_sim/ltpda/ltpda_toolbox_3.0.13/ltpda/classes/@LTPDAprefs/getPreferences.m', 12)" style="font-weight:bold">LTPDAprefs/getPreferences</a> (<a href="matlab: opentoline('/home/david/MySoft/lisa_sim/ltpda/ltpda_toolbox_3.0.13/ltpda/classes/@LTPDAprefs/getPreferences.m',12,0)">line 12</a>)  ### No LTPDA Preferences found in memory. Please run ltpda_startup.
+096   test_smodel_double        000.04   fail    Error message: Undefined variable "mpipeline" or class "mpipeline.ltpdapreferences.DisplayPrefGroup.KEY_ACTION_NONE".
+097   test_smodel_eval          000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+098   test_ao_fftfilt           000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+099   test_ao_removeVal         000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+100   test_ao_consolidate       000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+101   test_tsdata_class         000.23   fail    Error message: Dot indexing is not supported for variables of this type.
+102   test_ao_plot              000.03   fail    Error message: Dot indexing is not supported for variables of this type.
+103   test_collection_history   000.03   fail    Error message: Dot indexing is not supported for variables of this type.
+104   test_collection_plot      000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+105   test_matrix_plot          000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+106   test_isequal              000.02   fail    Error message: Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LTPDAprefs/getPreferences', '/home/david/MySoft/lisa_sim/ltpda/ltpda_toolbox_3.0.13/ltpda/classes/@LTPDAprefs/getPreferences.m', 12)" style="font-weight:bold">LTPDAprefs/getPreferences</a> (<a href="matlab: opentoline('/home/david/MySoft/lisa_sim/ltpda/ltpda_toolbox_3.0.13/ltpda/classes/@LTPDAprefs/getPreferences.m',12,0)">line 12</a>)  ### No LTPDA Preferences found in memory. Please run ltpda_startup.
+107   test_iplot_3              000.00   fail    Error message: Dot indexing is not supported for variables of this type.
+108   test_ao_detrend           000.01   fail    Error message: Dot indexing is not supported for variables of this type.
+
+
+% END 
