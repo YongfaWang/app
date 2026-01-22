@@ -91,7 +91,7 @@ export default {
       MessagePlugin.success('Completed!')
     },
     // 保存并运行
-    async onSaveAndRun(localContent) {
+    async onSaveAndRun({ localContent, pythonPath }) {
       this.saveXml(localContent)
       ipcRenderer.on("python-output", (_, data) => {
         this.logData += data;
@@ -139,7 +139,7 @@ export default {
       try {
         await ipcRenderer.invoke(
           "run-python",
-          (await ipcRenderer.invoke("getAppPath")) + this.pyPath
+          { pythonPath, scriptPath: (await ipcRenderer.invoke("getAppPath")) + this.pyPath }
         );
       } catch (error) {
         this.logData = `执行错误: ${error.message}`;

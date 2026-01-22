@@ -3,13 +3,16 @@
     <t-header v-if="isHiddenExecute" style="flex-shrink: 0;">
       <span style="font-size: 13pt; font-weight: bold">{{ title }}</span>
     </t-header>
-    <t-content style="flex: 1; min-height: 0;">
+    <t-content style="flex: 1; min-height: 0; background: white;">
       <div style="padding: 15px; height: calc(100% - 30px); display: flex; flex-direction: column;">
         <!-- 表单区域，设置可滚动 -->
         <div style="flex: 1; min-height: 0; overflow-y: auto; margin-bottom: 20px;">
           <t-form :data="localContent" label-width="120px" style="width: 100%; min-width: 800px;">
             <t-card v-for="(node, index) in localContent.node" :key="index" :title="node.name || node.comment"
-              hover-shadow style="margin-bottom: 20px">
+              hover-shadow :style="{
+                'margin-bottom': '20px',
+                'background-color': index % 2 === 1 ? '#DDF4D9' : '#DBDBFF'
+              }">
               <!-- 处理第一层节点（如 comments, glitches_types, glitches_parameters） -->
               <template #actions>
                 <t-tooltip v-if="node.comment" :content="node.comment">
@@ -212,7 +215,8 @@ export default {
       this.$emit("onCancel");
     },
     handlerSr() {
-      this.$emit("onSaveAndRun", this.localContent);
+    var appSettings = JSON.parse(localStorage.getItem("appSettings"));
+      this.$emit("onSaveAndRun", { localContent: this.localContent, pythonPath: appSettings.pythonPath });
     },
     handlerSave() {
       this.$emit("onOnlySave", this.localContent);
@@ -221,4 +225,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

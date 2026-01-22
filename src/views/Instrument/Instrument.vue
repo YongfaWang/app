@@ -1,37 +1,23 @@
 <template>
   <div style="height: 100%">
-    <IniConfig
-      v-show="showIniConfig"
-      :content="xmlContent"
-      title="Instrument Configure"
-      @onSaveAndRun="onSaveAndRun"
-      @onOnlySave="onOnlySave"
-      @onCancel="onCancel"
-      :isHiddenExecute="isHiddenExecute"
-    ></IniConfig>
+    <IniConfig v-show="showIniConfig" :content="xmlContent" title="Instrument Configure" @onSaveAndRun="onSaveAndRun"
+      @onOnlySave="onOnlySave" @onCancel="onCancel" :isHiddenExecute="isHiddenExecute"></IniConfig>
     <t-loading v-show="loading" />
     <div v-show="showLog" style="display: flex; flex-direction: column; height: 100%;">
       <div style="flex: 1; min-height: 0; overflow-y: auto;">
-        <t-textarea v-model="logData" readonly :autosize="{ minRows: 10, maxRows: 50 }" style="height: 100%;"/>
+        <t-textarea v-model="logData" readonly :autosize="{ minRows: 10, maxRows: 50 }" style="height: 100%;" />
       </div>
-      <div
-        style="
+      <div style="
           background-color: white;
           padding: 20px;
           display: flex;
           justify-content: end;
           flex-shrink: 0;
-        "
-      >
-        <t-button
-          @click="
-            showIniConfig = true;
-            showLog = false;
-          "
-          shape="rectangle"
-          theme="default"
-          style="margin-right: 20px"
-        >
+        ">
+        <t-button @click="
+          showIniConfig = true;
+        showLog = false;
+        " shape="rectangle" theme="default" style="margin-right: 20px">
           Return
         </t-button>
       </div>
@@ -90,7 +76,7 @@ export default {
       MessagePlugin.success('Completed!')
     },
     // 保存并运行
-    async onSaveAndRun(localContent) {
+    async onSaveAndRun({localContent, pythonPath}) {
       this.saveXml(localContent)
       ipcRenderer.on("python-output", (_, data) => {
         this.logData += data;
@@ -138,7 +124,7 @@ export default {
       try {
         await ipcRenderer.invoke(
           "run-python",
-          (await ipcRenderer.invoke("getAppPath")) + this.pyPath
+          { pythonPath, scriptPath: (await ipcRenderer.invoke("getAppPath")) + this.pyPath }
         );
       } catch (error) {
         this.logData = `执行错误: ${error.message}`;

@@ -35,7 +35,7 @@
       </t-head-menu>
     </t-header>
     <t-layout style="height: calc(100% - 64px)">
-      <t-aside style="border-top: 1px solid var(--component-border)">
+      <t-aside style="border-top: 1px solid var(--component-border);">
         <t-menu theme="light" v-model="currentMenu" :collapsed="collapsed" @change="changeHandler">
           <!-- <template #logo>
           <img :width="collapsed ? 35 : 136" :src="iconUrl" alt="logo" />
@@ -94,7 +94,7 @@
           </template>
         </t-menu>
       </t-aside>
-      <t-layout>
+      <t-layout style="background: url('/bg.jpg');">
         <t-content style="height: calc(100% - 64px)">
           <RouterView v-slot="{ Component }" @itemClicked="handleItemClicked" @returnClicked="routerHome">
             <transition name="fade">
@@ -102,20 +102,29 @@
             </transition>
           </RouterView>
         </t-content>
-        <t-footer>Copyright @ 2019-{{ new Date().getFullYear() }} [---------------]. All Rights Reserved</t-footer>
+        <!-- <t-footer>Copyright @ 2019-{{ new Date().getFullYear() }} [---------------]. All Rights Reserved</t-footer> -->
       </t-layout>
     </t-layout>
-    <t-dialog placement="center" v-model:visible="quitDialogVisible" theme="warning" header="Tip"
-      body="Do you want to exit?" cancelBtn="Cancel" confirmBtn="Exit" @confirm="quitApplication" /> <t-dialog
-      placement="center" v-model:visible="settingDialogVisible" header="Settings" @confirm="applySetting">
-      <div>
-        <p>Dark Mode</p>
-        <t-switch v-model="darkMode" @change="darkModeChange" />
-      </div>
-      <div>
-        <span>Python</span>
-        <t-input abel="Name" />
-      </div>
+    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" @confirm="saveSettings">
+      <template #default>
+        <div class="settings-grid">
+          <!-- Python 选择行：下拉 + 只读当前路径 -->
+          <div class="row python-row">
+            <div class="col">
+              <label class="label">Python</label>
+              <!-- 使用 t-select 渲染 tmpPythonPaths 列表 -->
+              <t-select label="Python" v-model="settingConfig.pythonPath" :options="tmpPythonPaths" creatable filterable
+                empty="No Python environment is required. Configure manually." placeholder="Select Python"
+                @create="createPython" />
+            </div>
+          </div>
+          <!-- 其他设置项占位 -->
+          <div class="row">
+            <label class="label">Example</label>
+            <t-input placeholder="其他设置..." />
+          </div>
+        </div>
+      </template>
     </t-dialog>
   </t-layout>
 </template>
@@ -129,13 +138,15 @@ export default {
   },
   created() {
     this.printTestInfo();
+    this.loadSettings();
     this.routerHome()
   },
   data() {
     return {
       currentMenu: 'home',
-      darkMode: false,
+      settingConfig: {},
       collapsed: false,
+      tmpPythonPaths: [],
       quitDialogVisible: false,
       settingDialogVisible: false,
       iconUrl: 'https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/site/logo%402x.png',
@@ -145,7 +156,6 @@ export default {
   methods: {
     fullscreen() {
       this.isFullScreen = !this.isFullScreen
-
       ipcRenderer.send('fullScreen', { isFullScreen: this.isFullScreen }); // 通知主进程关闭窗口
     },
     handleItemClicked(flag) {
@@ -170,17 +180,54 @@ export default {
       ipcRenderer.send('quit'); // 通知主进程关闭窗口
     },
     applySetting() {
-
+      // this.settingConfig.darkMode ? document.documentElement.setAttribute("theme-mode", "dark") : document.documentElement.removeAttribute("theme-mode");
     },
     async printTestInfo() {
+      console.log("Test Info");
     },
-    darkModeChange(status) {
-      if (status) {
-        // 设置深色模式
-        document.documentElement.setAttribute("theme-mode", "dark");
+    saveSettings() {
+      this.applySetting();
+      localStorage.setItem('appSettings', JSON.stringify(this.settingConfig));
+      this.settingDialogVisible = false
+    },
+    // true 代表数据加载成功
+    loadSettings() {
+      // 是否第一次打开程序
+      const firstOpen = localStorage.getItem('isInitSettings');
+      if (firstOpen === null) {
+        localStorage.setItem('isInitSettings', 'false');
+        // 初始化设置数据
+        localStorage.setItem('appSettings', JSON.stringify({
+          pythonPath: ''
+        }));
+        this.readSettings();
+        return true;
       } else {
-        // 重置为浅色模式
-        document.documentElement.removeAttribute("theme-mode");
+        this.readSettings();
+      }
+
+      // 应用设置
+      this.applySetting();
+
+      this.tmpPythonPaths = ['/usr/bin/python3', '/usr/local/bin/python3'].map(p => ({ label: p, value: p }));
+      return true;
+    },
+    // 设置重置
+    resetSettings() {
+      localStorage.removeItem('appSettings');
+      localStorage.removeItem('isInitSettings');
+      this.loadSettings();
+    },
+    createPython(value) {
+      this.tmpPythonPaths.push({
+        value,
+        label: value,
+      });
+    },
+    readSettings() {
+      const savedSettings = localStorage.getItem('appSettings');
+      if (savedSettings) {
+        this.settingConfig = JSON.parse(savedSettings);
       }
     },
     changePage(active) {
@@ -195,6 +242,37 @@ export default {
 </script>
 
 <style>
+.settings-grid {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 300px;
+  /* 根据需要调整对话框宽度 */
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.python-row {
+  align-items: flex-start;
+}
+
+.col {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  color: #333;
+}
+
 .fade-enter-active {
   transition: all 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -216,22 +294,7 @@ export default {
 .fade-leave-from {
   opacity: 1;
 }
-
-body {
-  /* background-image: url('/src/assets/bg.jpg'); */
-}
-
-/* .t-layout {
-  background-color: rgba(255, 255, 255, 0);
-} */
-
-/* .t-default-menu {
-  background-color: rgba(255, 255, 255, .5);
-}
-.t-layout__sider {
-  background-color: rgba(255, 255, 255, .5);
-} */
- * {
-    font-family: 'Arial', sans-serif;
+* {
+  font-family: 'Arial', sans-serif;
 }
 </style>

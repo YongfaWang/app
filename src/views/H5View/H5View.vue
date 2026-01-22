@@ -21,7 +21,7 @@
         <t-breadcrumb>
           <template v-slot:default>
             <t-breadcrumbItem v-for="(item, index) in currentPath" :key="index" @click="navTo(item)">{{ item
-              }}</t-breadcrumbItem>
+            }}</t-breadcrumbItem>
           </template>
           <template v-slot:separator> <chevron-right-icon name="chevron-right" />
           </template>
@@ -84,10 +84,10 @@
         <span>Please open an HDF5 (*. h5) file</span>
       </div>
     </div>
-    <t-dialog placement="center" v-model:visible="isVisibleDrawConfig" header="画图配置"
-      :confirmBtn="null" :cancelBtn="null" width="60vw" height="50vh" :footer="null">
+    <t-dialog placement="center" v-model:visible="isVisibleDrawConfig" header="画图配置" :confirmBtn="null"
+      :cancelBtn="null" width="60vw" height="50vh" :footer="null">
       <div style="height: 50vh; overflow: hidden;">
-        <DrawConfig :content="drawContent"/>
+        <DrawConfig :content="drawContent" />
       </div>
     </t-dialog>
   </t-layout>
@@ -137,9 +137,10 @@ export default {
     },
     async readH5() {
       this.currentDir = []
+      var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
       this.rawH5Tree = await ipcRenderer.invoke(
         "readH5",
-        this.filePath
+        { pythonPath, filePath: this.filePath }
       )
       console.log(this.rawH5Tree);
       if (this.rawH5Tree.type === "group") {
@@ -175,7 +176,8 @@ export default {
       }
     },
     async draw(item) {
-      this.drawContent = await ipcRenderer.invoke("readH5Dataset", this.filePath, item.path)
+      var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
+      this.drawContent = await ipcRenderer.invoke("readH5Dataset", { pythonPath, filePath: this.filePath, datasetPath: item.path })
       this.isVisibleDrawConfig = true
     },
     join(item) {

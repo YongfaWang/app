@@ -261,9 +261,8 @@ ipcMain.handle('saveXml', async (event, { filePath, content }) => {
 /**
  * 执行Python脚本
  */
-ipcMain.handle('run-python', (event, scriptPath) => {
-  console.log("scriptPath: ", scriptPath);
-  const pythonProcess = spawn('python3', [scriptPath]);
+ipcMain.handle('run-python', (event, {pythonPath, scriptPath}) => {
+  const pythonProcess = spawn(pythonPath, [scriptPath]);
 
   pythonProcess.stdout.on('data', (data) => {
     event.sender.send('python-output', data.toString());
@@ -307,14 +306,14 @@ class H5FileReader {
         this.pythonScriptPath = path.join(__dirname, 'h5_reader.py');
     }
 
-    async executePythonScript(command, filePath, datasetPath = null) {
+    async executePythonScript(pythonPath, command, filePath, datasetPath = null) {
         return new Promise((resolve, reject) => {
             const args = [this.pythonScriptPath, command, filePath];
             if (datasetPath) {
                 args.push(datasetPath);
             }
 
-            const pythonProcess = spawn('python3', args);
+            const pythonProcess = spawn(pythonPath, args); // 'python3' 可以根据需要修改为 'python' 或其他路径
             let stdout = '';
             let stderr = '';
 
@@ -358,7 +357,7 @@ class H5FileReader {
 const h5Reader = new H5FileReader();
 
 // 读取HDF5文件结构的IPC处理器
-ipcMain.handle('readH5', async (event, filePath) => {
+ipcMain.handle('readH5', async (event, {pythonPath, filePath}) => {
     try {
       /**
        * 一般选择的文件一定是存在的，所以不需要验证文件是否存在，另外这一处代码有问题
@@ -371,7 +370,7 @@ ipcMain.handle('readH5', async (event, filePath) => {
         // }
 
         // 读取HDF5文件结构
-        const structure = await h5Reader.executePythonScript('structure', filePath);
+        const structure = await h5Reader.executePythonScript(pythonPath, 'structure', filePath);
         return structure;
     } catch (error) {
         return { error: error.message };
@@ -379,7 +378,7 @@ ipcMain.handle('readH5', async (event, filePath) => {
 });
 
 // 单独读取数据集的IPC处理器
-ipcMain.handle('readH5Dataset', async (event, filePath, datasetPath) => {
+ipcMain.handle('readH5Dataset', async (event, {pythonPath, filePath, datasetPath}) => {
     try {
         // 检查文件是否存在
         // if (!await h5Reader.checkFileExists(filePath)) {
@@ -387,7 +386,7 @@ ipcMain.handle('readH5Dataset', async (event, filePath, datasetPath) => {
         // }
 
         // 读取指定数据集
-        const datasetData = await h5Reader.executePythonScript('dataset', filePath, datasetPath);
+        const datasetData = await h5Reader.executePythonScript(pythonPath, 'dataset', filePath, datasetPath);
         return datasetData;
     } catch (error) {
         return { error: error.message };
