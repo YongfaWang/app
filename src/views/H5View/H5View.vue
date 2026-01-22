@@ -20,6 +20,9 @@
         style="padding-left: 10px; padding-right: 10px; display: flex; flex-direction: row; justify-content: space-between; flex-shrink: 0;">
         <t-breadcrumb>
           <template v-slot:default>
+            <t-breadcrumbItem disabled>
+              Path:
+            </t-breadcrumbItem>
             <t-breadcrumbItem v-for="(item, index) in currentPath" :key="index" @click="navTo(item)">{{ item
             }}</t-breadcrumbItem>
           </template>
@@ -74,17 +77,16 @@
         </t-list-item>
       </t-list>
     </div>
-
     <!-- 空状态区域 -->
     <div v-else class="openfile" @click="openFile"
       style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <div class="openfile-content">
-        <FileAttachmentIcon style="margin-right: 5px;" size="20px" :fill-color='"transparent"'
+        <FileAttachmentIcon style="margin-right: 5px;" size="30px" :fill-color='"transparent"'
           :stroke-color='"currentColor"' :stroke-width="2.5" />
-        <span>Please open an HDF5 (*. h5) file</span>
+        <span style="font-size: 30px;">Please open an HDF5 (*. h5) file</span>
       </div>
     </div>
-    <t-dialog placement="center" v-model:visible="isVisibleDrawConfig" header="画图配置" :confirmBtn="null"
+    <t-dialog placement="center" v-model:visible="isVisibleDrawConfig" header="Draw" :confirmBtn="null"
       :cancelBtn="null" width="60vw" height="50vh" :footer="null">
       <div style="height: 50vh; overflow: hidden;">
         <DrawConfig :content="drawContent" />
@@ -127,8 +129,9 @@ export default {
   },
   methods: {
     openFile() {
+      ipcRenderer.removeAllListeners("openH5Complete"); // 清除之前的监听器, 防止多次触发
       ipcRenderer.on('openH5Complete', (event, files) => {
-        console.log(files); // 输出选择的文件
+        console.log("当前打开的h5文件" + files); // 输出选择的文件
         // this.filePath = "/home/wang/Downloads/RectangleGlitch.h5" // test file
         this.filePath = files
         this.readH5()
@@ -144,10 +147,10 @@ export default {
       )
       console.log(this.rawH5Tree);
       if (this.rawH5Tree.type === "group") {
-
         this.currentPath = this.rawH5Tree.path === '/' ? '/' : this.rawH5Tree.path.split('/')
         this.rawH5Tree.children.forEach(item => {
           if (item.type === "group") {
+            console.log(item);
             this.currentDir.push({
               name: item.name,
               type: "group",

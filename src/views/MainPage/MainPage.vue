@@ -3,7 +3,7 @@
     <t-header>
       <t-head-menu value="item1" height="120px">
         <template #logo>
-          <img width="136" class="logo" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+          <img width="136" class="logo" src="/logo.jpg" alt="logo" />
         </template>
         <t-menu-item value="item1">
           <template #icon>
@@ -36,7 +36,9 @@
     </t-header>
     <t-layout style="height: calc(100% - 64px)">
       <t-aside style="border-top: 1px solid var(--component-border);">
-        <t-menu theme="light" v-model="currentMenu" :collapsed="collapsed" @change="changeHandler">
+        <!-- default-expanded="['2-1']" 默认展开Tools -->
+        <t-menu default-expanded="['2-1']" theme="light" v-model="currentMenu" :collapsed="collapsed"
+          @change="changeHandler">
           <!-- <template #logo>
           <img :width="collapsed ? 35 : 136" :src="iconUrl" alt="logo" />
         </template> -->
@@ -64,19 +66,19 @@
               <template #icon>
                 <t-icon name="edit-1" />
               </template>
-              Test1
+              Test1_placeholder
             </t-menu-item>
             <t-menu-item value="2-3">
               <template #icon>
                 <t-icon name="root-list" />
               </template>
-              Test2
+              Test2_placeholder
             </t-menu-item>
             <t-menu-item value="2-4">
               <template #icon>
                 <t-icon name="check" />
               </template>
-              Test3
+              Test3_placeholder
             </t-menu-item>
           </t-menu-group>
           <t-menu-group title="More">
@@ -84,7 +86,7 @@
               <template #icon>
                 <t-icon name="help" />
               </template>
-              Guide
+              Guide_placeholder
             </t-menu-item>
           </t-menu-group>
           <template #operations>
@@ -126,6 +128,14 @@
         </div>
       </template>
     </t-dialog>
+    <!-- 退出提示对话框 -->
+    <t-dialog theme="danger" v-model:visible="quitDialogVisible" header="Tip" :confirm-btn="{
+      content: 'Exit',
+      theme: 'danger'
+    }" cancel-btn="Cancel" @confirm="quitApplication">
+      Do you want to exit the program?
+    </t-dialog>
+
   </t-layout>
 </template>
 
@@ -191,7 +201,7 @@ export default {
       this.settingDialogVisible = false
     },
     // true 代表数据加载成功
-    loadSettings() {
+    async loadSettings() {
       // 是否第一次打开程序
       const firstOpen = localStorage.getItem('isInitSettings');
       if (firstOpen === null) {
@@ -209,7 +219,14 @@ export default {
       // 应用设置
       this.applySetting();
 
-      this.tmpPythonPaths = ['/usr/bin/python3', '/usr/local/bin/python3'].map(p => ({ label: p, value: p }));
+      // 扫描本地所有的 Python 环境
+      var paths = await ipcRenderer.invoke('searchPythonPaths');
+      console.log(paths);
+
+      this.tmpPythonPaths = paths.map(p => ({
+        value: p,
+        label: p,
+      }));
       return true;
     },
     // 设置重置
@@ -242,7 +259,7 @@ export default {
 </script>
 
 <style>
-.settings-grid {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+.settings-grid {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -294,6 +311,7 @@ export default {
 .fade-leave-from {
   opacity: 1;
 }
+
 * {
   font-family: 'Arial', sans-serif;
 }
