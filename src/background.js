@@ -245,13 +245,10 @@ ipcMain.handle('readIni', async (event, filePath) => {
   
 })
 ipcMain.handle('saveXml', async (event, { filePath, content }) => {
-  console.log("filePath: ", filePath);
-  console.log("content: ", content);
   try {
     const iniString = ini.stringify(content);
     console.log(iniString);
     fs.writeFileSync(filePath, iniString, 'utf-8');
-
     saveConfigToFile(content, filePath)
     return true;
   } catch (error) {

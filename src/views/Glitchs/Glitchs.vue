@@ -1,37 +1,17 @@
 <template>
   <div style="height: 100%">
-    <IniConfig
-      v-show="showIniConfig"
-      :content="xmlContent"
-      title="Glitchs Configure"
-      @onSaveAndRun="onSaveAndRun"
-      @onOnlySave="onOnlySave"
-      @onCancel="onCancel"
-      :isHiddenExecute="isHiddenExecute"
-    ></IniConfig>
-    <t-loading v-show="loading" />
-    <div v-show="showLog" style="display: flex; flex-direction: column; height: 100%;">
-      <div style="flex: 1; min-height: 0; overflow-y: auto;">
-        <t-textarea v-model="logData" readonly :autosize="{ minRows: 10, maxRows: 50 }" style="height: 100%;"/>
-      </div>
-      <div
-        style="
-          background-color: white;
-          padding: 20px;
-          display: flex;
-          justify-content: end;
-          flex-shrink: 0;
-        "
-      >
-        <t-button
-          @click="
-            showIniConfig = true;
-            showLog = false;
-          "
-          shape="rectangle"
-          theme="default"
-          style="margin-right: 20px"
-        >
+    <IniConfig v-show="showIniConfig" :content="xmlContent" title="Glitchs Configure" @onSaveAndRun="onSaveAndRun"
+      @onOnlySave="onOnlySave" @onCancel="onCancel" :isHiddenExecute="isHiddenExecute"></IniConfig>
+    <t-loading v-if="loading" class="loading-fixed" />
+    <div v-show="showLog" class="log-wrapper">
+      <t-textarea v-model="logData" readonly class="log-textarea" />
+
+      <div class="log-actions">
+        <t-button @click="copyLog" shape="rectangle" theme="default" style="margin-right: 20px">
+          Copy Log
+        </t-button>
+        <t-button @click="showIniConfig = true; showLog = false;" shape="rectangle" theme="default"
+          style="margin-right: 20px">
           Return
         </t-button>
       </div>
@@ -67,6 +47,14 @@ export default {
     };
   },
   methods: {
+    async copyLog() {
+      try {
+        await navigator.clipboard.writeText(this.logData);
+        MessagePlugin.success('Log copied to clipboard!');
+      } catch (err) {
+        MessagePlugin.error('Failed to copy log: ' + err);
+      }
+    },
     async getData() {
       // console.log(this.iniPath);
       // this.iniContent = await ipcRenderer.invoke(
@@ -77,7 +65,7 @@ export default {
         "readXml",
         (await ipcRenderer.invoke("getAppPath")) + this.xmlPath
       );
-      
+
       // this.iniContent = toRaw(this.iniContent);
       this.xmlContent = toRaw(this.xmlContent);
     },
@@ -95,27 +83,28 @@ export default {
     onOnlySave(localContent) {
       this.saveXml(localContent);
       MessagePlugin.success('Completed!')
+      this.$emit("onCancel");
     },
     // 保存并运行
-    async onSaveAndRun({ localContent, pythonPath}) {
+    async onSaveAndRun({ localContent, pythonPath }) {
       this.saveXml(localContent)
-      ipcRenderer.on("python-output", (_, data) => {
-        this.logData += data;
-      });
-      ipcRenderer.on("python-end", () => {
-        // this.runing = false;
-      });
-      this.logData = "";
-      this.showIniConfig = false;
+      // 先移除之前的监听，避免重复添加监听器，导致多次响应，否则日志会重复出现多次
+      ipcRenderer.removeAllListeners("python-output");
+      ipcRenderer.removeAllListeners("python-end");
+      /**
+       * logData: 日志内容
+       * showIniConfig: 是否显示配置界面
+       * loading: 是否显示加载中
+       * showLog: 是否显示日志界面
+       * 
+       * 执行前显示配置界面
+       * 模拟加载, loading = true, 模拟1000ms后停止加载
+       * loading结束后显示日志界面
+       */
+      this.logData = "";  // 日志内容
+      this.showIniConfig = false; // 隐藏配置界面
       this.loading = true;
-      this.showLog = false;
-      setTimeout(() => {
-        console.log("asd");
-        this.loading = false;
-        this.running = true;
-        this.showLog = true;
-        MessagePlugin.success('Completed, need to check the output logs.')
-      }, 1000);
+      this.showLog = false;     // 隐藏日志界面
       // 保存后出现错误
       if (
         !(await ipcRenderer.invoke("saveXml", {
@@ -129,18 +118,12 @@ export default {
         this.logData += data;
       });
       ipcRenderer.on("python-end", () => {
-        // this.runing = false;
+        this.runing = false;
       });
-      this.logData = "";
-      this.showIniConfig = false;
-      this.loading = true;
-      this.showLog = false;
       setTimeout(() => {
-        console.log("asd");
         this.loading = false;
-        this.running = true;
         this.showLog = true;
-        MessagePlugin.success('Completed, need to check the output logs.')
+        MessagePlugin.success('Start running...')
       }, 1000);
       try {
         await ipcRenderer.invoke(
@@ -149,7 +132,7 @@ export default {
         );
       } catch (error) {
         this.logData = `执行错误: ${error.message}`;
-        // this.runing = false;
+        this.runing = false;
       }
     },
     onCancel() {
@@ -158,4 +141,41 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.loading-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.log-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  /* 🚫 外层永远不允许滚动 */
+}
+
+.log-textarea {
+  flex: 1;
+  /* ✅ 占满剩余高度 */
+  height: 100%;
+}
+
+/* 强制内部 textarea 填满并滚动 */
+.log-textarea textarea {
+  height: 100% !important;
+  resize: none;
+  overflow-y: auto;
+}
+
+.log-actions {
+  flex-shrink: 0;
+  background: white;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
