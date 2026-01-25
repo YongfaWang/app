@@ -171,7 +171,7 @@ function processXMLObject(obj) {
 
   // 遍历对象的所有属性
   for (const key in obj) {
-    if (obj.hasOwn(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
 
       // 特殊处理_options，将其转换为数组
@@ -232,7 +232,7 @@ function prepareForXML(obj) {
   const result = {};
 
   for (const key in obj) {
-    if (obj.hasOwn(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
 
       // 将数组类型的_options转换回字符串
