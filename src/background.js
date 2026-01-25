@@ -12,7 +12,7 @@ const { URL } = require('url')
 // const { createProtocol } = require('vue-cli-plugin-electron-builder/lib')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 var window;
-
+var isShowMenu = true;
 const isDev = !app.isPackaged
 
 function createProtocol(scheme, customProtocol) {
@@ -63,6 +63,7 @@ async function createWindow() {
     height: 700,
     minHeight: 650,
     minWidth: 1150,
+    autoHideMenuBar: isShowMenu ? false : true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
 
@@ -87,16 +88,26 @@ async function createWindow() {
     window.loadURL('app://./index.html')
     // window.loadURL('http://localhost:8080/')
   }
+
+  // 关闭菜单栏
+  if (!isShowMenu) { window.setMenu(null) }
+  // 禁用快捷键
   window.webContents.on('before-input-event', (event, input) => {
     const isClose =
       (input.control || input.meta) && input.key.toLowerCase() === 'w'
+    const isRefresh =
+      (input.control || input.meta) && input.key.toLowerCase() === 'r'
+    const isQuit =
+      (input.control || input.meta) && input.key.toLowerCase() === 'q'
+    const isZoomIn =
+      (input.control || input.meta) && input.key.toLowerCase() === '+'
+    const isZoomOut =
+      (input.control || input.meta) && input.key.toLowerCase() === '-'
 
-    if (isClose) {
+    if (isClose || isRefresh || isQuit || isZoomIn || isZoomOut) {
       event.preventDefault()
     }
   })
-  // 关闭菜单栏
-  // Menu.setApplicationMenu(null);
 }
 
 // Quit when all windows are closed.
