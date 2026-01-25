@@ -13,6 +13,8 @@ const { URL } = require('url')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 var window;
 
+const isDev = !app.isPackaged
+
 function createProtocol(scheme, customProtocol) {
   (customProtocol || protocol).registerBufferProtocol(
     scheme,
@@ -62,6 +64,7 @@ async function createWindow() {
     minHeight: 650,
     minWidth: 1150,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -116,6 +119,13 @@ ipcMain.on('fullScreen', (event, data) => {
 ipcMain.handle('getAppPath', () => {
   return app.getAppPath()
 })
+
+ipcMain.handle('openDirectory', async () => {
+  const result = await dialog.showOpenDialog({
+    properties: ['openDirectory']
+  });
+  return result;
+});
 const xml2js = require("xml2js")
 async function parseXMLConfig(filepath) {
   // 读取XML文件
@@ -266,19 +276,19 @@ ipcMain.handle('saveXml', async (event, { filePath, content }) => {
 /**
  * 执行Python脚本
  */
-ipcMain.handle('run-python', (event, { pythonPath, scriptPath }) => {
+ipcMain.handle('runPython', (event, { pythonPath, scriptPath }) => {
   const pythonProcess = spawn(pythonPath, [scriptPath]);
 
   pythonProcess.stdout.on('data', (data) => {
-    event.sender.send('python-output', data.toString());
+    event.sender.send('pythonOutput', data.toString());
   });
 
   pythonProcess.stderr.on('data', (data) => {
-    event.sender.send('python-output', data.toString());
+    event.sender.send('pythonOutput', data.toString());
   });
 
   pythonProcess.on('close', () => {
-    event.sender.send('python-end');
+    event.sender.send('pythonEnd');
   });
 
   return new Promise((resolve) => {
@@ -316,12 +326,6 @@ ipcMain.handle('searchPythonPaths', async () => {
         reject(error.message);
         return;
       }
-
-      // stdout 示例：
-      // /usr/bin/python
-      // /usr/bin/python3
-      // /usr/local/bin/python3
-
       const paths = stdout
         .split('\n')
         .map(line => line.trim())
@@ -333,7 +337,9 @@ ipcMain.handle('searchPythonPaths', async () => {
 });
 class H5FileReader {
   constructor() {
-    this.pythonScriptPath = path.join(__dirname, 'h5_reader.py');
+    this.pythonScriptPath = isDev
+      ? path.resolve(__dirname, '../dist_electron/h5_reader.py')
+      : path.join(process.resourcesPath, 'h5_reader.py')
   }
 
   async executePythonScript(pythonPath, command, filePath, datasetPath = null) {

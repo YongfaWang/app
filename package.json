@@ -2,7 +2,12 @@
   "name": "tasky-vue",
   "version": "0.1.0",
   "private": true,
-  "main": "src/background.js",
+  "description": "Tasky Vue desktop app",
+  "author": {
+    "name": "Wang Yongfa",
+    "email": "wangyongfa04@163.com"
+  },
+  "main": "background.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

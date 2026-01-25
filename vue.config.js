@@ -1,31 +1,31 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
+module.exports = {
   pluginOptions: {
     electronBuilder: {
-      nodeIntegration: true, // 关键！启用 Node.js 集成
+      preload: 'src/preload.js',
+      // 不要写 mainProcessFile
+      builderOptions: {
+        // extraFiles: [
+        //   {
+        //     from: 'src/preload.js',
+        //     to: 'preload.js'
+        //   }
+        // ],
+        extraResources: [
+          {
+            from: 'dist_electron/h5_reader.py',
+            to: 'h5_reader.py'
+          }
+        ],
+        // linux: {
+        //   target: ['deb', 'rpm', 'snap', 'dir']
+        // },
+        linux: {
+          target: ['deb']
+        },
+        // win: {
+        //   target: 'nsis'
+        // }
+      }
     }
   }
-})
-
-// module.exports = {
-//   configureWebpack: {
-//     resolve: {
-//       fallback: {
-//         "path": false,
-//         "fs": false
-//       }
-//     }
-//   }
-// }
-
-
-// import { defineConfig } from '@vue/cli-service'
-// export default defineConfig({
-//   transpileDependencies: true,
-//   pluginOptions: {
-//     electronBuilder: {
-//       nodeIntegration: true, // 关键！启用 Node.js 集成
-//     }
-//   }
-// })
+}

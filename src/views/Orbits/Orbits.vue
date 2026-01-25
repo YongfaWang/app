@@ -19,7 +19,6 @@
   </div>
 </template>
 <script>
-import { ipcRenderer } from "electron";
 import { toRaw } from "vue";
 import IniConfig from "@/components/IniConfig/IniConfig";
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -34,14 +33,15 @@ export default {
   },
   data() {
     return {
+      homeDirInvalidDialog: false,
       isHiddenExecute: true,
       xmlContent: {},
       loading: false,
       runing: false,
       showIniConfig: true,
       logData: "",
-      xmlPath: "/lisa_sim/testorbits/orbits.xml",
-      pyPath: "/lisa_sim/testorbits/main_orbits.py",
+      xmlPath: JSON.parse(localStorage.getItem("appSettings")).homeDir + "/testorbits/orbits.xml",
+      pyPath: JSON.parse(localStorage.getItem("appSettings")).homeDir + "/testorbits/main_orbits.py",
     };
   },
   methods: {
@@ -53,25 +53,35 @@ export default {
         MessagePlugin.error('Failed to copy log: ' + err);
       }
     },
+    homeDirInvalidConfirmed() {
+      this.homeDirInvalidDialog = false;
+      this.$emit('onCancel');
+    },
     async getData() {
       console.log(this.xmlPath);
-      this.xmlContent = await ipcRenderer.invoke(
-        "readXml",
-        (await ipcRenderer.invoke("getAppPath")) + this.xmlPath
-      );
+      try {
+        this.xmlContent = await window.electronAPI.readXml(
+          this.xmlPath
+        );
+      } catch (error) {
+        // 弹出提示对话框，告知用户需要检查是否指定lisa_sim目录并目录内文件完整性.
+        console.error('Failed to read XML: ' + error);
+        this.homeDirInvalidDialog = true; // 弹窗显示
+        this.xmlContent = {};
+        return;
+      }
       this.xmlContent = toRaw(this.xmlContent);
       console.log(this.xmlContent);
     },
-
     async saveXml(localContent) {
       // 保存后出现错误
       if (
-        !(await ipcRenderer.invoke("saveXml", {
-          filePath: (await ipcRenderer.invoke("getAppPath")) + this.xmlPath,
+        !(await window.electronAPI.saveXml({
+          filePath: this.xmlPath,
           content: toRaw(localContent),
         }))
       ) {
-        console.err("Save Error.");
+        console.error("Save Error.");
       }
     },
     onOnlySave(localContent) {
@@ -83,8 +93,8 @@ export default {
     async onSaveAndRun({ localContent, pythonPath }) {
       this.saveXml(localContent)
       // 先移除之前的监听，避免重复添加监听器，导致多次响应，否则日志会重复出现多次
-      ipcRenderer.removeAllListeners("python-output");
-      ipcRenderer.removeAllListeners("python-end");
+      window.electronAPI.removeAllListeners("pythonOutput");
+      window.electronAPI.removeAllListeners("pythonEnd");
       /**
        * logData: 日志内容
        * showIniConfig: 是否显示配置界面
@@ -101,17 +111,17 @@ export default {
       this.showLog = false;     // 隐藏日志界面
       // 保存后出现错误
       if (
-        !(await ipcRenderer.invoke("saveXml", {
-          filePath: (await ipcRenderer.invoke("getAppPath")) + this.xmlPath,
+        !(await window.electronAPI.saveXml({
+          filePath: this.xmlPath,
           content: toRaw(localContent),
         }))
       ) {
-        console.err("Save Error.");
+        console.error("Save Error.");
       }
-      ipcRenderer.on("python-output", (_, data) => {
+      window.electronAPI.pythonOutput((data) => {
         this.logData += data;
       });
-      ipcRenderer.on("python-end", () => {
+      window.electronAPI.pythonEnd(() => {
         this.runing = false;
       });
       setTimeout(() => {
@@ -120,9 +130,8 @@ export default {
         MessagePlugin.success('Start running...')
       }, 1000);
       try {
-        await ipcRenderer.invoke(
-          "run-python",
-          { pythonPath, scriptPath: (await ipcRenderer.invoke("getAppPath")) + this.pyPath }
+        await window.electronAPI.runPython(
+          { pythonPath, scriptPath: this.pyPath }
         );
       } catch (error) {
         this.logData = `执行错误: ${error.message}`;

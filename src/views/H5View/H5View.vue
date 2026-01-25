@@ -95,7 +95,6 @@
   </t-layout>
 </template>
 <script>
-const { ipcRenderer } = require('electron');
 import DrawConfig from '@/components/DrawConfig/DrawConfig';
 // const H5 = require("node_modules/h5wasm/dist/esm/hdf5_hl.js")
 // import * as hdf5 from "https://cdn.jsdelivr.net/gh/bmaranville/h5wasm@publish/dist/hdf5_hl.js";
@@ -129,22 +128,19 @@ export default {
   },
   methods: {
     openFile() {
-      ipcRenderer.removeAllListeners("openH5Complete"); // 清除之前的监听器, 防止多次触发
-      ipcRenderer.on('openH5Complete', (event, files) => {
+      window.electronAPI.removeAllListeners("openH5Complete"); // 清除之前的监听器, 防止多次触发
+      window.electronAPI.openH5Complete((event, files) => {
         console.log("当前打开的h5文件" + files); // 输出选择的文件
         // this.filePath = "/home/wang/Downloads/RectangleGlitch.h5" // test file
         this.filePath = files
         this.readH5()
       })
-      ipcRenderer.send('openH5');
+      window.electronAPI.openH5();
     },
     async readH5() {
       this.currentDir = []
       var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
-      this.rawH5Tree = await ipcRenderer.invoke(
-        "readH5",
-        { pythonPath, filePath: this.filePath }
-      )
+      this.rawH5Tree = await window.electronAPI.readH5({ pythonPath, filePath: this.filePath })
       console.log(this.rawH5Tree);
       if (this.rawH5Tree.type === "group") {
         this.currentPath = this.rawH5Tree.path === '/' ? '/' : this.rawH5Tree.path.split('/')
@@ -180,7 +176,7 @@ export default {
     },
     async draw(item) {
       var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
-      this.drawContent = await ipcRenderer.invoke("readH5Dataset", { pythonPath, filePath: this.filePath, datasetPath: item.path })
+      this.drawContent = await window.electronAPI.readH5Dataset({ pythonPath, filePath: this.filePath, datasetPath: item.path })
       this.isVisibleDrawConfig = true
     },
     join(item) {

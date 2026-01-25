@@ -113,17 +113,22 @@
           <!-- Python 选择行：下拉 + 只读当前路径 -->
           <div class="row python-row">
             <div class="col">
-              <label class="label">Python</label>
+              <!-- <label class="label">Python</label> -->
               <!-- 使用 t-select 渲染 tmpPythonPaths 列表 -->
               <t-select label="Python" v-model="settingConfig.pythonPath" :options="tmpPythonPaths" creatable filterable
                 empty="No Python environment is required. Configure manually." placeholder="Select Python"
                 @create="createPython" />
             </div>
           </div>
-          <!-- 其他设置项占位 -->
+          <!-- lisa_sim Path -->
           <div class="row">
-            <label class="label">Example</label>
-            <t-input placeholder="其他设置..." />
+            <!-- <label class="label">lisa_sim Path</label> -->
+            <t-input label="lisa_sim Path" v-model="settingConfig.homeDir" placeholder="Please select a path" style="flex: 1;">
+              <!-- 在输入框右侧添加按钮 -->
+              <template #suffix>
+                <t-button size="small" @click="selectPath">Select</t-button>
+              </template>
+            </t-input>
           </div>
         </div>
       </template>
@@ -141,7 +146,6 @@
 
 <script>
 
-import { ipcRenderer } from 'electron'
 export default {
   name: 'MainPage',
   components: {
@@ -166,7 +170,7 @@ export default {
   methods: {
     fullscreen() {
       this.isFullScreen = !this.isFullScreen
-      ipcRenderer.send('fullScreen', { isFullScreen: this.isFullScreen }); // 通知主进程关闭窗口
+      window.electronAPI.fullScreen({ isFullScreen: this.isFullScreen }); // 通知主进程关闭窗口
     },
     handleItemClicked(flag) {
       this.currentMenu = flag
@@ -186,8 +190,16 @@ export default {
         this.changePage(active)
       }
     },
+    selectPath() {
+      window.electronAPI.openDirectory().then((result) => {
+        console.log(result);
+        if (!result.canceled) {
+          this.settingConfig.homeDir = result.filePaths[0];
+        }
+      });
+    },
     quitApplication() {
-      ipcRenderer.send('quit'); // 通知主进程关闭窗口
+      window.electronAPI.quit(); // 通知主进程关闭窗口
     },
     applySetting() {
       // this.settingConfig.darkMode ? document.documentElement.setAttribute("theme-mode", "dark") : document.documentElement.removeAttribute("theme-mode");
@@ -208,7 +220,8 @@ export default {
         localStorage.setItem('isInitSettings', 'false');
         // 初始化设置数据
         localStorage.setItem('appSettings', JSON.stringify({
-          pythonPath: ''
+          pythonPath: '',
+          homeDir: '',
         }));
         this.readSettings();
         return true;
@@ -220,7 +233,7 @@ export default {
       this.applySetting();
 
       // 扫描本地所有的 Python 环境
-      var paths = await ipcRenderer.invoke('searchPythonPaths');
+      var paths = await window.electronAPI.searchPythonPaths();
       console.log(paths);
 
       this.tmpPythonPaths = paths.map(p => ({
