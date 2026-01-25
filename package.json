@@ -9,10 +9,11 @@
   },
   "main": "background.js",
   "scripts": {
+    "build:py": "pyinstaller --onefile --name h5_reader h5_reader.py",
+    "preelectron:serve": "npm run build:py",
+    "preelectron:build": "npm run build:py",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:win32": "electron-packager . App --platform=win32 --arch=x64 --icon=icon.ico --out=./build_win32 --asar --app-version=1.0.0",
-    "build:linux": "electron-packager . App --platform=linux --arch=x64 --icon=icon.ico --out=./build_linux --asar --app-version=1.0.0 --overwrite",
     "lint": "vue-cli-service lint",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",

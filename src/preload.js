@@ -20,10 +20,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
       callback(event, files)),
   openH5: () =>
     ipcRenderer.send('openH5'),
-  readH5Dataset: ({ pythonPath, filePath, datasetPath }) =>
-    ipcRenderer.invoke("readH5Dataset", { pythonPath, filePath, datasetPath }),
-  readH5: ({ pythonPath, filePath }) =>
-    ipcRenderer.invoke("readH5", { pythonPath, filePath }),
+  readH5Dataset: ({ filePath, datasetPath }) =>
+    ipcRenderer.invoke("readH5Dataset", { filePath, datasetPath }),
+  readH5: ({ filePath }) =>
+    ipcRenderer.invoke("readH5", { filePath }),
   fullScreen: (data) =>
     ipcRenderer.send('fullScreen', data),
   quit: () =>

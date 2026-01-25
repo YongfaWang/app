@@ -12,8 +12,8 @@ module.exports = {
         // ],
         extraResources: [
           {
-            from: 'dist_electron/h5_reader.py',
-            to: 'h5_reader.py'
+            from: 'dist/h5_reader', // 项目根目录的路径
+            to: 'h5_reader'    // 打包后在应用资源目录中的路径
           }
         ],
         // linux: {

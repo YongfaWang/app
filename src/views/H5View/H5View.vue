@@ -139,8 +139,7 @@ export default {
     },
     async readH5() {
       this.currentDir = []
-      var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
-      this.rawH5Tree = await window.electronAPI.readH5({ pythonPath, filePath: this.filePath })
+      this.rawH5Tree = await window.electronAPI.readH5({ filePath: this.filePath })
       console.log(this.rawH5Tree);
       if (this.rawH5Tree.type === "group") {
         this.currentPath = this.rawH5Tree.path === '/' ? '/' : this.rawH5Tree.path.split('/')
@@ -175,8 +174,7 @@ export default {
       }
     },
     async draw(item) {
-      var pythonPath = JSON.parse(localStorage.getItem("appSettings")).pythonPath
-      this.drawContent = await window.electronAPI.readH5Dataset({ pythonPath, filePath: this.filePath, datasetPath: item.path })
+      this.drawContent = await window.electronAPI.readH5Dataset({ filePath: this.filePath, datasetPath: item.path })
       this.isVisibleDrawConfig = true
     },
     join(item) {
