@@ -1,24 +1,24 @@
 # tasky-vue
 
-## Project setup
+## 项目安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 开发时编译并热重载
 ```
 npm run electron:serve
 ```
 
-### Compiles and minifies for production
+### 编译并压缩用于生产环境
 ```
 npm run electron:build
 ```
 
-### Lints and fixes files
+### 检查并修复文件
 ```
 npm run lint
 ```
 
-### Customize configuration
+### 自定义配置
 See [Configuration Reference](https://cli.vuejs.org/config/).
