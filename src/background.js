@@ -1,6 +1,6 @@
 // 'use strict'
 
-const { app, protocol, BrowserWindow, Menu, ipcMain, dialog } = require('electron')
+const { app, protocol, BrowserWindow, ipcMain, dialog } = require('electron')
 const { spawn, exec } = require('child_process');
 const path = require('path')
 const fs = require('fs')
@@ -171,7 +171,7 @@ function processXMLObject(obj) {
 
   // 遍历对象的所有属性
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (obj.hasOwn(key)) {
       const value = obj[key];
 
       // 特殊处理_options，将其转换为数组
@@ -232,7 +232,7 @@ function prepareForXML(obj) {
   const result = {};
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (obj.hasOwn(key)) {
       const value = obj[key];
 
       // 将数组类型的_options转换回字符串
@@ -260,7 +260,7 @@ ipcMain.handle('readIni', async (event, filePath) => {
     const dataStr = await fs.promises.readFile(filePath, "utf8");
     return ini.parse(dataStr); // 直接返回解析结果
   } catch (err) {
-    return reject(err.message);
+    return err.message;
   }
 
 
@@ -333,6 +333,7 @@ ipcMain.handle('searchPythonPaths', async () => {
   const cmd = 'which -a python; which -a python3';
   return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
+      stderr; // 忽略stderr输出
       if (error) {
         reject(error.message);
         return;
