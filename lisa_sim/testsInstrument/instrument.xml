@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+  <node>
+    <type>node</type>
+    <name>comments</name>
+    <comment>111</comment>
+    <node>
+      <type>text</type>
+      <name>comments</name>
+      <value>Wang Yongfa</value>
+    </node>
+  </node>
+  <node>
+    <type>node</type>
+    <name>instrument_init</name>
+    <comment>Sampling parameters</comment>
+    <node>
+      <type>number</type>
+      <comment>number of measurement samples to generate</comment>
+      <name>size</name>
+      <value>10000</value>
+    </node>
+    <node>
+      <type>number</type>
+      <comment>sampling period [s]</comment>
+      <name>dt</name>
+      <value>0.25</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>initial time [s], or 'orbits' to match that of the orbits</comment>
+      <name>t0</name>
+      <value>orbits</value>
+    </node>
+    <node>
+      <type>number</type>
+      <comment>ratio of sampling frequencies for physics vs. measurement simulation</comment>
+      <name>physics_upsampling</name>
+      <value>4</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>ratio of sampling frequencies for physics vs. measurement simulation aafilter: antialiasing filter function, list of coefficients, filter design method, or None for no filter; to design a filter from a Kaiser window, use a tuple ('kaiser', attenuation [dB], f1 [Hz], f2 [Hz]) with f1 &lt; f2 the frequencies defining the transition band</comment>
+      <name>aafilter</name>
+      <value>('kaiser', 240, 1.1, 2.9)</value>
+    </node>
+    <node>
+      <type>number</type>
+      <comment>ratio of sampling frequencies for measurements vs. telemetry events,defualt is 86400*4</comment>
+      <name>telemetry_downsampling</name>
+      <value>345600</value>
+    </node>
+    <node>
+      <type>number</type>
+      <comment>number of telemetry samples before :attr:`lisainstrument.Instrument.t0`</comment>
+      <name>initial_telemetry_size</name>
+      <value>0</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>path to orbit file, dictionary of constant PPRs for static arms, 'static' for a set of static PPRs corresponding to a fit of Keplerian orbits around t = 0, or dictionary of PPR time series</comment>
+      <name>orbits</name>
+      <value>../data/readOEMOrbits.h5</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>orbit_dataset</name>
+      <comment>datasets to read from orbit file, must be 'tps/ppr' or 'tcb/ltt'; if set to 'tps/ppr', read proper pseudo-ranges (PPRs) in TPSs (proper times), if set to 'tcb/ltt', read light travel times (LTTs) in TCB (coordinate time); ignored if no orbit files are used</comment>
+      <options>tps/ppr,tcb/ltt</options>
+      <value>tps/ppr</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>path to gravitational-wave file, or dictionary of gravitational-wave responses; if ``orbit_dataset`` is ``'tps/ppr'``, we try to read link responses as functions of the TPS instead of link responses in the TCB (fallback behavior)</comment>
+      <name>gws</name>
+      <value>None</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>interpolation function or interpolation method and parameters; use a tuple ('lagrange', order) with `order` the odd Lagrange interpolation order; an arbitrary function should take (x, shift [number of samples]) as parameter</comment>
+      <name>interpolation</name>
+      <value>('lagrange', 31)</value>
+    </node>
+    <node>
+      <type>text</type>
+      <comment>path to glitch file, or dictionary of glitch signals per injection point</comment>
+      <name>glitches</name>
+      <value>None</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>lock</name>
+      <comment>pre-defined laser locking configuration ('N1-12' non-swap N1 with 12 primary laser), or 'six' for 6 lasers locked on cavities, or a dictionary of locking conditions</comment>
+      <options>N1-12,six</options>
+      <value>N1-12</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>fplan</name>
+      <comment>path to frequency-plan file, dictionary of locking beatnote frequencies [Hz], or 'static' for a default set of constant locking beatnote frequencies</comment>
+      <options>static</options>
+      <value>static</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>laser_asds</name>
+      <comment>dictionary of amplitude spectral densities for laser noise [Hz/sqrt(Hz)]</comment>
+      <value>30</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>laser_shape</name>
+      <comment>laser noise spectral shape, either 'white' or 'white+infrared'</comment>
+      <options>white,white+infrared</options>
+      <value>white+infrared</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>central_freq</name>
+      <comment>laser central frequency from which all offsets are computed [Hz]</comment>
+      <value>281600000000000</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>offset_freqs</name>
+      <comment>dictionary of laser frequency offsets for unlocked lasers [Hz], defined with respect to :attr:`lisainstrument.Instrument.central_freq`, or 'default' for a default set of frequency offsets that yield valid beatnote frequencies for 'six' lasers locked on cavity and default set of constant PPRs</comment>
+      <options>default,lisainstrument.Instrument.central_freq</options>
+      <value>default</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>clock_asds</name>
+      <comment>dictionary of clock noise amplitude spectral densities [/sqrt(Hz)]</comment>
+      <value>632000000000000</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>clock_offsets</name>
+      <comment>dictionary of clock offsets from TPS [s]</comment>
+      <value>0</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>clock_freqoffsets</name>
+      <comment>dictionary of clock frequency offsets [s/s], or 'default'</comment>
+      <value>default</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>clock_freqlindrifts</name>
+      <comment>dictionary of clock frequency linear drifts [s/s^2], or 'default'</comment>
+      <value>default</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>clock_freqquaddrifts</name>
+      <comment>dictionary of clock frequency quadratic drifts [s/s^3], or 'default'</comment>
+      <value>default</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>clockinv_tolerance</name>
+      <comment>convergence tolerance for clock noise inversion [s]</comment>
+      <value>0.0000000001</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>clockinv_maxiter</name>
+      <comment>maximum number of iterations for clock noise inversion</comment>
+      <value>5</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>backlink_asds</name>
+      <comment>dictionary of amplitude spectral densities for backlink noise [m/sqrt(Hz)]</comment>
+      <value>0.000000000003</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>backlink_fknees</name>
+      <comment>dictionary of cutoff frequencied for backlink noise [Hz]</comment>
+      <value>0.002</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>testmass_asds</name>
+      <comment>dictionary of amplitude spectral densities for test-mass noise [ms^(-2)/sqrt(Hz)]</comment>
+      <value>0.0000000000000024</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>testmass_fknees</name>
+      <comment>dictionary of low-frequency cutoff frequencies for test-mass noise [Hz]</comment>
+      <value>0.0004</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>testmass_fbreak</name>
+      <comment>dictionary of high-frequency break frequencies for test-mass noise [Hz]</comment>
+      <value>0.008</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>testmass_shape</name>
+      <comment>test-mass noise spectral shape, either 'original' or 'lowfreq-relax'</comment>
+      <options>original,lowfreq-relax</options>
+      <value>original</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>testmass_frelax</name>
+      <comment>dictionary of low-frequency relaxation frequencies for test-mass noise [Hz]</comment>
+      <value>0.00008</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>oms_asds</name>
+      <comment>tuple of dictionaries of amplitude spectral densities for OMS noise [m/sqrt(Hz)], ordered as (isi_carrier, isi_usb, tmi_carrier, tmi_usb, rfi_carrier, rfi_usb)</comment>
+      <value>(0.00000000000635, 0.0000000000125, 0.00000000000142, 0.00000000000338, 0.00000000000332, 0.00000000000790)</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>oms_fknees</name>
+      <comment>dictionary of cutoff frequencies for OMS noise</comment>
+      <value>0.002</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>moc_time_correlation_asds</name>
+      <comment>dictionary of amplitude spectral densities for MOC time correlation noise [s/sqrt(Hz)], the default ASD seems rather high, this is due to the small sampling rate (default 1 / 86400s)</comment>
+      <value>0.42</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>mosa_longitudinal_jitter_asds</name>
+      <comment>dictionary of amplitude spectral densities for MOC time correlation noise [s/sqrt(Hz)], the default ASD seemdictionary of amplitude spectral densities for MOSA longitudinal jitter on the sensitive axis [m/sqrt(Hz)]s rather high, this is due to the small sampling rate (default 1 / 86400s)</comment>
+      <value>0.000000002</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>sc_angular_jitter_asds</name>
+      <comment>tuple of dictionaries of angular jitter amplitude spectral densities for spacecraft, ordered as (yaw, pitch, roll) [rad/sqrt(Hz)]</comment>
+      <value>(0.000000005, 0.000000005, 0.000000005)</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>sc_angular_jitter_fknees</name>
+      <comment>tuple of dictionaries of cutoff frequencies for spacecraft angular jitter, ordered as (yaw, pitch, roll) [Hz]</comment>
+      <value>(0.0008, 0.0008, 0.0008)</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>mosa_angular_jitter_asds</name>
+      <comment>tuple of dictionaries of angular jitter amplitude spectral densities for MOSA, ordered as (yaw, pitch) [rad/sqrt(Hz)]</comment>
+      <value>(0.000000002, 0.000000002)</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>mosa_angular_jitter_fknees</name>
+      <comment>tuple of dictionaries of cutoff frequencies for MOSA angular jitter, ordered as (yaw, pitch) [Hz]</comment>
+      <value>(0.0008, 0.0008)</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>mosa_angles</name>
+      <comment>dictionary of oriented MOSA opening angles [deg], or 'default'</comment>
+      <value>default</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>ttl_coeffs</name>
+      <comment>tuple (local_phi, distant_phi, local_eta, distant_eta) of dictionaries of tilt-to-length coefficients on each MOSA [m/rad], 'default' for a default set of coefficients, or 'random' to draw a set of coefficients from uniform distributions (LISA-UKOB-INST-ML-0001-i2 LISA TTL STOP Model, summary table, 2.4 mm/rad and 2.2mm/rad for distant and local coefficients, respectively)</comment>
+      <options>default,random</options>
+      <value>default</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>dws_asds</name>
+      <comment>dictionary of amplitude spectral densities for DWS measurement noise [rad/sqrt(Hz)],(dws_asds = 7E-8/335 = 2.08955223880597E-10 )</comment>
+      <value>0.000000000208955223880597</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>ranging_biases</name>
+      <comment>dictionary of ranging noise bias [s]</comment>
+      <value>0</value>
+    </node>
+    <node>
+      <type>number</type>
+      <name>ranging_asds</name>
+      <comment>dictionary of ranging noise amplitude spectral densities [s/sqrt(Hz)]</comment>
+      <value>0.000000003</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>prn_ambiguity</name>
+      <comment>distance after which PRN code repeats itself [m] (reasonable value is 300 km), None or 0 for no ambiguities</comment>
+      <options>None,0</options>
+      <value>default</value>
+    </node>
+    <node>
+      <type>text</type>
+      <name>electro_delays</name>
+      <comment>tuple (isi, tmi, rfi) of dictionaries for electronic delays [s]</comment>
+      <value>(0, 0, 0)</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>electro_delays</name>
+      <comment>whether to use multiprocessing</comment>
+      <options>True,False</options>
+      <value>False</value>
+    </node>
+    <node>
+      <type>check</type>
+      <name>keep_noises</name>
+      <comment>optional category of noises to keep on ('laser', 'modulation', 'clock', 'pathlength', 'ranging', 'jitters', 'dws', 'moc-time-correlation', 'doppler') or None</comment>
+      <options>None,laser,modulation,clock,pathlength,ranging,jitters,dws,moc-time-correlation,doppler</options>
+      <value>None</value>
+    </node>
+    <node>
+      <type>select</type>
+      <name>keep_dopplers_noise</name>
+      <comment>whether to use multiprocessing</comment>
+      <options>True,False</options>
+      <value>False</value>
+    </node>
+  </node>
+</data>

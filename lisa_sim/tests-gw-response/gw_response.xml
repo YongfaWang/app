@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+  <node>
+    <type>node</type>
+    <name>comments</name>
+    <node>
+      <type>text</type>
+      <name>comments</name>
+      <value>Wang Yongfa</value>
+    </node>
+  </node>
+  <node>
+    <type>node</type>
+    <name>gws_types</name>
+    <comment>Gws Types</comment>
+    <node>
+      <type>check</type>
+      <name>glitch_type</name>
+      <comment>Comment</comment>
+      <options>galactic-binary,stochastic-background,stochastic-point-source,galactic-binary-TQ3</options>
+      <value>galactic-binary-TQ3,galactic-binary</value>
+    </node>
+  </node>
+  <node>
+    <type>node</type>
+    <name>glitches_parameters</name>
+    <comment>Glitches types parameters</comment>
+    <node>
+      <type>text</type>
+      <name>orbits_file</name>
+      <value>../data/readOEMOrbits.h5</value>
+    </node>
+  </node>
+</data>
