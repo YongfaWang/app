@@ -22,6 +22,8 @@
 ```
 npm install
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+git config user.name [你的名字]
+git config user.email [你的邮箱]
 ```
 
 ### 开发时编译并热重载
@@ -38,6 +40,5 @@ npm run electron:build
 ```
 npm run lint
 ```
-
 ### 自定义配置
 See [Configuration Reference](https://cli.vuejs.org/config/).
