@@ -45,7 +45,7 @@ jobs:
         run: npm run electron:build
         env:
           PUBLISH: never
-          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
           ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: 1
 
       # ---------- Upload ----------
