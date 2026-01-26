@@ -44,7 +44,8 @@ jobs:
       - name: Build Electron App
         run: npm run electron:build
         env:
-          # Windows 可能需要设置一些环境变量
+          PUBLISH: never
+          GITHUB_TOKEN: ""
           ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: 1
 
       # ---------- Upload ----------
