@@ -96,7 +96,7 @@
           </template>
         </t-menu>
       </t-aside>
-      <t-layout style="background: url('/bg.jpg');">
+      <t-layout>
         <t-content style="height: calc(100% - 64px)">
           <RouterView v-slot="{ Component }" @itemClicked="handleItemClicked" @returnClicked="routerHome">
             <transition name="fade">
@@ -107,7 +107,7 @@
         <!-- <t-footer>Copyright @ 2019-{{ new Date().getFullYear() }} [---------------]. All Rights Reserved</t-footer> -->
       </t-layout>
     </t-layout>
-    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" @confirm="saveSettings">
+    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" @confirm="saveSettings" cancel-btn="Cancel" confirm-btn="OK">
       <template #default>
         <div class="settings-grid">
           <!-- Python 选择行：下拉 + 只读当前路径 -->
@@ -126,7 +126,7 @@
             <t-input label="lisa_sim Path" v-model="settingConfig.homeDir" placeholder="Please select a path" style="flex: 1;">
               <!-- 在输入框右侧添加按钮 -->
               <template #suffix>
-                <t-button size="small" @click="selectPath">Select</t-button>
+                <t-button size="small" variant="dashed" @click="selectPath">Select</t-button>
               </template>
             </t-input>
           </div>

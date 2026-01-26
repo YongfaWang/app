@@ -10,7 +10,7 @@
       ]">
         <t-col>
           <div class="button-wh">
-            <DesktopButton tooltip="点击后进行Orbits操作" content="Orbits" @onClick="pageRouter('orbits')"></DesktopButton>
+            <DesktopButton tooltip="Click to perform Orbits operation" content="Orbits" @onClick="pageRouter('orbits')"></DesktopButton>
           </div>
         </t-col>
         <t-col>
@@ -23,7 +23,7 @@
         </t-col>
         <t-col>
           <div class="button-wh">
-            <DesktopButton tooltip="点击后进行GW Response操作" content="GW Response" @onClick="pageRouter('gwresponse')">
+            <DesktopButton tooltip="Click to perform GW Response operation" content="GW Response" @onClick="pageRouter('gwresponse')">
             </DesktopButton>
           </div>
         </t-col>
@@ -37,7 +37,7 @@
         </t-col>
         <t-col>
           <div class="button-wh">
-            <DesktopButton tooltip="点击后进行Instrument操作" content="Instrument" @onClick="pageRouter('instrument')">
+            <DesktopButton tooltip="Click to perform Instrument operation" content="Instrument" @onClick="pageRouter('instrument')">
             </DesktopButton>
           </div>
         </t-col>
@@ -51,7 +51,7 @@
         </t-col>
         <t-col>
           <div class="button-wh">
-            <DesktopButton tooltip="点击后进行H5 View操作" content="H5 View" @onClick="pageRouter('h5view')"></DesktopButton>
+            <DesktopButton tooltip="Click to perform H5 View operation" content="H5 View" @onClick="pageRouter('h5view')"></DesktopButton>
           </div>
         </t-col>
       </t-row>
@@ -119,7 +119,7 @@
         <t-col>
           <div class="button-wh">
             <div class="button-wh">
-              <DesktopButton tooltip="点击后进行Glitchs操作" content="Glitchs" @onClick="pageRouter('glitchs')">
+              <DesktopButton tooltip="Click to perform Glitchs operation" content="Glitchs" @onClick="pageRouter('glitchs')">
               </DesktopButton>
             </div>
           </div>
