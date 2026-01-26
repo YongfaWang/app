@@ -6,7 +6,7 @@
 |git version 2.50.1.windows.1|
 |Node.js v16.14.2|
 |npm 8.7.0|
-|Python 3.10|
+|Python 3.13.5 Conda环境|
 
 ---
 **对于某些符合以下两个条件的人**
