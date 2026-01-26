@@ -2,6 +2,7 @@
 
 const { app, protocol, BrowserWindow, ipcMain, dialog } = require('electron')
 const { spawn, exec } = require('child_process');
+const os = require('os');
 const path = require('path')
 const fs = require('fs')
 const ini = require('ini')
@@ -330,20 +331,55 @@ ipcMain.on('openH5', (event) => {
 })
 // 查找系统中所有的python路径
 ipcMain.handle('searchPythonPaths', async () => {
-  const cmd = 'which -a python; which -a python3';
+  let cmd;
+  
+  if (os.platform() === 'win32') {
+    // Windows平台，使用where命令查找
+    cmd = 'where.exe python';
+  } else {
+    // Linux/macOS平台，使用which命令查找
+    cmd = 'which -a python; which -a python3';
+  }
+
   return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
-      stderr; // 忽略stderr输出
+      if (stderr) {
+        console.error(stderr);  // 打印stderr错误信息
+      }
+
       if (error) {
         reject(error.message);
         return;
       }
-      const paths = stdout
+
+      let paths = stdout
         .split('\n')
         .map(line => line.trim())
         .filter(Boolean);
 
-      resolve(paths);
+      // 查找Conda环境的路径
+      if (os.platform() !== 'win32') {
+        // 仅在Linux/macOS系统中查找Conda环境路径
+        const condaCmd = 'conda info --envs';
+        exec(condaCmd, (condaError, condaStdout, condaStderr) => {
+          condaStderr;
+          if (condaError) {
+            console.error('Error finding Conda environments:', condaError.message);
+          } else {
+            // 解析Conda环境路径
+            const condaPaths = condaStdout
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line.includes('base') || line.includes('envs'));
+            
+            paths = [...paths, ...condaPaths];  // 合并Conda路径
+          }
+
+          resolve(paths);
+        });
+      } else {
+        resolve(paths); // Windows平台下，直接返回查找到的路径
+      }
     });
   });
 });

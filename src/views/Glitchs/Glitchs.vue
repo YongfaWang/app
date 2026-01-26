@@ -143,7 +143,7 @@ export default {
           { pythonPath, scriptPath: this.pyPath }
         );
       } catch (error) {
-        this.logData = `执行错误: ${error.message}`;
+        this.logData = `执行错误, 你可能没有设置Python, 需要你到设置指定一个Python: ${error.message}`;
         this.runing = false;
       }
     },

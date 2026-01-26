@@ -11,9 +11,9 @@
           </t-radio-group>
 
           <div v-if="formData.rangeType === 'start-end'" class="range-inputs">
-            <t-input-number v-model="formData.startIndex" :min="0" :max="dataLength - 1" placeholder="起始位置" />
+            <t-input-number v-model="formData.startIndex" :min="0" :max="dataLength - 1" placeholder="Begin" />
             <span class="separator">-</span>
-            <t-input-number v-model="formData.endIndex" :min="0" :max="dataLength - 1" placeholder="结束位置" />
+            <t-input-number v-model="formData.endIndex" :min="0" :max="dataLength - 1" placeholder="End" />
           </div>
 
           <div v-if="formData.rangeType === 'segments'" class="segments-container">
@@ -29,13 +29,13 @@
           </div>
         </t-form-item>
 
-        <t-form-item v-if="lineCount > 1" label="显示线条" name="selectedLines">
+        <t-form-item v-if="lineCount > 1" label="Show Line" name="selectedLines">
           <t-checkbox-group v-model="formData.selectedLines" :options="lineOptions" />
         </t-form-item>
 
         <t-form-item>
-          <t-button theme="primary" type="submit">确定</t-button>
-          <t-button variant="outline" @click="resetForm">重置</t-button>
+          <t-button theme="primary" type="submit">OK</t-button>
+          <t-button variant="outline" @click="resetForm">Reset</t-button>
         </t-form-item>
       </t-form>
     </div>
@@ -71,7 +71,7 @@ export default {
       lineCount: 0,
       formRules: {
         dataRange: [
-          { required: true, message: '请选择数据范围', trigger: 'blur' }
+          { required: true, message: 'Please select data range...', trigger: 'blur' }
         ]
       }
     };
@@ -79,7 +79,7 @@ export default {
   computed: {
     lineOptions() {
       return Array.from({ length: this.lineCount }, (_, i) => ({
-        label: `线条 ${i + 1}`,
+        label: `Line ${i + 1}`,
         value: i
       }));
     }
@@ -148,7 +148,7 @@ export default {
         // 设置默认配置 - 优化小数值显示
         const option = {
           title: {
-            text: '数据可视化图表',
+            text: 'Data visualization',
             left: 'center'
           },
           tooltip: {
@@ -158,7 +158,7 @@ export default {
             },
             // 自定义tooltip格式化，确保小数值正确显示
             formatter: (params) => {
-              let result = `数据点: ${params[0].dataIndex}<br>`;
+              let result = `Data Point: ${params[0].dataIndex}<br>`;
               params.forEach(param => {
                 const value = param.value;
                 let displayValue;
@@ -221,13 +221,13 @@ export default {
           xAxis: {
             type: 'category',
             boundaryGap: false,
-            name: '数据点',
+            name: 'Data Point',
             data: []
           },
           yAxis: {
             type: 'value',
             scale: true,
-            name: '数值',
+            name: 'Value',
             // 优化小数值显示
             axisLabel: {
               formatter: (value) => {
@@ -317,7 +317,7 @@ export default {
             }
           });
 
-          const seriesName = `线条 ${lineIndex + 1}`;
+          const seriesName = `Line ${lineIndex + 1}`;
           seriesData.push({
             name: seriesName,
             type: 'line',
@@ -390,7 +390,7 @@ export default {
     handleSubmit({ validateResult }) {
       if (validateResult === true) {
         this.updateChart();
-        this.$message.success('配置已应用');
+        this.$message.success('Configuration applied!');
 
         // 输出表单数据用于调试
         console.log('表单数据:', JSON.parse(JSON.stringify(this.formData)));
@@ -403,6 +403,7 @@ export default {
     },
 
     handleResize() {
+      this.initData();
       if (this.chartInstance) {
         try {
           this.chartInstance.resize();

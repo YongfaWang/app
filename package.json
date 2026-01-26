@@ -9,7 +9,7 @@
   },
   "main": "background.js",
   "scripts": {
-    "build:py": "pyinstaller --onefile --name h5_reader h5_reader.py",
+    "build:py": "pyinstaller --onefile --name h5_reader --hidden-import=h5py h5_reader.py",
     "preelectron:serve": "npm run build:py",
     "preelectron:build": "npm run build:py",
     "serve": "vue-cli-service serve",
