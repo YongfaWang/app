@@ -1,12 +1,12 @@
 # tasky-vue
 ## 环境配置
-|Windows开发环境|Ubuntu 20.04|
+|Windows开发环境|Ubuntu 20.04 Linux wang-340XAA-350XAA-550XAA 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 x86_64 x86_64 GNU/Linux|
 |---|---|
-|Visual Studio Code 1.108.2 |
-|git version 2.50.1.windows.1|
-|Node.js v16.14.2|
-|npm 8.7.0|
-|Python 3.13.5 Conda环境|
+|Visual Studio Code 1.108.2 | Visual Studio Code  1.108.1 |
+|git version 2.50.1.windows.1| git version 2.43.0 |
+|Node.js v16.14.2| v20.18.0 |
+|npm 8.7.0| npm 11.7.0 |
+|Python 3.13.5 Conda环境| Python 3.13.11 conda 25.11.1 |
 
 ---
 **对于某些符合以下两个条件的人**
