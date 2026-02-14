@@ -27,4 +27,12 @@ export default {
 body {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 0, 0, 0.15);
+  border-radius: 10px;
+}
 </style>

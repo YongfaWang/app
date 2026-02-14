@@ -1,69 +1,54 @@
 <template>
-  <t-layout style="height: 100%">
-    <t-header>
-      <t-head-menu value="item1" height="120px">
-        <template #logo>
-          <img width="136" class="logo" src="/logo.jpg" alt="logo" />
-        </template>
-        <t-menu-item value="item1">
-          <template #icon> <t-icon name="window" /> </template>Window
-          Mode</t-menu-item
-        >
-        <!-- <t-menu-item value="item2">大屏模式</t-menu-item> -->
-        <template #operations>
-          <t-tooltip content="Home">
-            <t-button
-              class="t-demo-collapse-btn"
-              variant="text"
-              shape="square"
-              @click="routerHome"
-            >
-              <template #icon><t-icon name="home" /></template>
-            </t-button>
-          </t-tooltip>
-          <t-tooltip v-if="isFullScreen" content="Exit FullScreen">
-            <t-button
-              class="t-demo-collapse-btn"
-              variant="text"
-              shape="square"
-              @click="fullscreen"
-            >
-              <template #icon><t-icon name="fullscreen-exit" /></template>
-            </t-button>
-          </t-tooltip>
-          <t-tooltip v-if="!isFullScreen" content="FullScreen">
-            <t-button
-              class="t-demo-collapse-btn"
-              variant="text"
-              shape="square"
-              @click="fullscreen"
-            >
-              <template #icon><t-icon name="fullscreen-2" /></template>
-            </t-button>
-          </t-tooltip>
-          <t-tooltip content="Settings">
-            <t-button
-              class="t-demo-collapse-btn"
-              variant="text"
-              shape="square"
-              @click="settingDialogVisible = true"
-            >
-              <template #icon><t-icon name="setting" /></template>
-            </t-button>
-          </t-tooltip>
-        </template>
-      </t-head-menu>
-    </t-header>
+  <t-layout style="height: 100%;">
+    <div class="header-drawer-container" :class="{ 'is-collapsed': isHeaderCollapsed }">
+      <t-header class="custom-header">
+        <t-head-menu value="item1" height="120px">
+          <template #logo>
+            <img width="136" class="logo" src="/logo.jpg" alt="logo" />
+          </template>
+          <t-menu-item value="item1">
+            <template #icon> <t-icon name="window" /> </template>Window
+            Mode</t-menu-item>
+          <!-- <t-menu-item value="item2">大屏模式</t-menu-item> -->
+          <template #operations>
+            <t-tooltip content="Home">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="routerHome">
+                <template #icon><t-icon name="home" /></template>
+              </t-button>
+            </t-tooltip>
+            <t-tooltip v-if="isFullScreen" content="Exit FullScreen">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="fullscreen">
+                <template #icon><t-icon name="fullscreen-exit" /></template>
+              </t-button>
+            </t-tooltip>
+            <t-tooltip v-if="!isFullScreen" content="FullScreen">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="fullscreen">
+                <template #icon><t-icon name="fullscreen-2" /></template>
+              </t-button>
+            </t-tooltip>
+            <t-tooltip content="Settings">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="settingDialogVisible = true">
+                <template #icon><t-icon name="setting" /></template>
+              </t-button>
+            </t-tooltip>
+
+            <t-tooltip :content="isHeaderCollapsed ? '展开' : '收起'">
+              <t-button variant="text" shape="square" @click="toggleHeader">
+                <template #icon><t-icon :name="isHeaderCollapsed ? 'chevron-down' : 'chevron-up'" /></template>
+              </t-button>
+            </t-tooltip>
+          </template>
+        </t-head-menu>
+        <div v-if="isHeaderCollapsed" class="drawer-handle" @click="toggleHeader">
+          <t-icon name="chevron-down" size="16px" />
+        </div>
+      </t-header>
+    </div>
     <t-layout style="height: calc(100% - 64px)">
       <t-aside style="border-top: 1px solid var(--component-border)">
         <!-- default-expanded="['2-1']" 默认展开Tools -->
-        <t-menu
-          default-expanded="['2-1']"
-          theme="light"
-          v-model="currentMenu"
-          :collapsed="collapsed"
-          @change="changeHandler"
-        >
+        <t-menu default-expanded="['2-1']" theme="light" v-model="currentMenu" :collapsed="collapsed"
+          @change="changeHandler">
           <!-- <template #logo>
           <img :width="collapsed ? 35 : 136" :src="iconUrl" alt="logo" />
         </template> -->
@@ -115,24 +100,16 @@
             </t-menu-item>
           </t-menu-group>
           <template #operations>
-            <t-button
-              class="t-demo-collapse-btn"
-              variant="text"
-              shape="square"
-              @click="quitDialogVisible = true"
-            >
+            <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="quitDialogVisible = true">
               <template #icon><t-icon name="login" /></template>
             </t-button>
           </template>
         </t-menu>
       </t-aside>
       <t-layout>
-        <t-content style="height: calc(100% - 64px)">
-          <RouterView
-            v-slot="{ Component }"
-            @itemClicked="handleItemClicked"
-            @returnClicked="routerHome"
-          >
+        <!-- 子页面 -->
+        <t-content style="height: calc(100% - 64px);">
+          <RouterView v-slot="{ Component }" @itemClicked="handleItemClicked" @returnClicked="routerHome">
             <transition name="fade">
               <component :is="Component" />
             </transition>
@@ -141,33 +118,18 @@
         <!-- <t-footer>Copyright @ 2019-{{ new Date().getFullYear() }} [---------------]. All Rights Reserved</t-footer> -->
       </t-layout>
     </t-layout>
-    <t-dialog
-      placement="center"
-      v-model:visible="settingDialogVisible"
-      header="Settings"
-      cancel-btn="Cancel"
-      confirm-btn="OK"
-      @confirm="saveSettings"
-    >
+    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" cancel-btn="Cancel"
+      confirm-btn="OK" @confirm="saveSettings">
       <template #footer>
         <div style="display: flex; justify-content: space-between; width: 100%">
           <t-button theme="default" variant="base" @click="resetDialogVisible = true">
             Reset
           </t-button>
           <div>
-            <t-button
-              theme="default"
-              variant="base"
-              @click="settingDialogVisible = false"
-            >
+            <t-button theme="default" variant="base" @click="settingDialogVisible = false">
               Cancel
             </t-button>
-            <t-button
-              theme="primary"
-              variant="base"
-              @click="saveSettings"
-              style="margin-left: 8px"
-            >
+            <t-button theme="primary" variant="base" @click="saveSettings" style="margin-left: 8px">
               OK
             </t-button>
           </div>
@@ -180,32 +142,19 @@
             <div class="col">
               <!-- <label class="label">Python</label> -->
               <!-- 使用 t-select 渲染 tmpPythonPaths 列表 -->
-              <t-select
-                label="Python"
-                v-model="settingConfig.pythonPath"
-                :options="tmpPythonPaths"
-                creatable
-                filterable
-                empty="No Python environment is required. Configure manually."
-                placeholder="Select Python"
-                @create="createPython"
-              />
+              <t-select label="Python" v-model="settingConfig.pythonPath" :options="tmpPythonPaths" creatable filterable
+                empty="No Python environment is required. Configure manually." placeholder="Select Python"
+                @create="createPython" />
             </div>
           </div>
           <!-- lisa_sim Path -->
           <div class="row">
             <!-- <label class="label">lisa_sim Path</label> -->
-            <t-input
-              label="lisa_sim Path"
-              v-model="settingConfig.homeDir"
-              placeholder="Please select a path"
-              style="flex: 1"
-            >
+            <t-input label="lisa_sim Path" v-model="settingConfig.homeDir" placeholder="Please select a path"
+              style="flex: 1">
               <!-- 在输入框右侧添加按钮 -->
               <template #suffix>
-                <t-button size="small" variant="dashed" @click="selectPath"
-                  >Select</t-button
-                >
+                <t-button size="small" variant="dashed" @click="selectPath">Select</t-button>
               </template>
             </t-input>
           </div>
@@ -213,31 +162,17 @@
       </template>
     </t-dialog>
     <!-- 退出提示对话框 -->
-    <t-dialog
-      theme="danger"
-      v-model:visible="quitDialogVisible"
-      header="Tip"
-      :confirm-btn="{
-        content: 'Exit',
-        theme: 'danger',
-      }"
-      cancel-btn="Cancel"
-      @confirm="quitApplication"
-    >
+    <t-dialog theme="danger" v-model:visible="quitDialogVisible" header="Tip" :confirm-btn="{
+      content: 'Exit',
+      theme: 'danger',
+    }" cancel-btn="Cancel" @confirm="quitApplication">
       Do you want to exit the program?
       <!-- 清空设置对框框 -->
     </t-dialog>
-        <t-dialog
-      theme="danger"
-      v-model:visible="resetDialogVisible"
-      header="Tip"
-      :confirm-btn="{
-        content: 'Confirm',
-        theme: 'danger',
-      }"
-      cancel-btn="Cancel"
-      @confirm="resetSettings"
-    >
+    <t-dialog theme="danger" v-model:visible="resetDialogVisible" header="Tip" :confirm-btn="{
+      content: 'Confirm',
+      theme: 'danger',
+    }" cancel-btn="Cancel" @confirm="resetSettings">
       Are you sure you want to reset all settings? This will clear all local storage data.
     </t-dialog>
   </t-layout>
@@ -254,6 +189,7 @@ export default {
   },
   data() {
     return {
+      isHeaderCollapsed: false,
       currentMenu: "home",
       settingConfig: {},
       collapsed: false,
@@ -267,6 +203,9 @@ export default {
     };
   },
   methods: {
+    toggleHeader() {
+      this.isHeaderCollapsed = !this.isHeaderCollapsed;
+    },
     fullscreen() {
       this.isFullScreen = !this.isFullScreen;
       window.electronAPI.fullScreen({ isFullScreen: this.isFullScreen }); // 通知主进程关闭窗口
@@ -347,10 +286,10 @@ export default {
     // 设置重置
     resetSettings() {
       // 可选：添加确认提示
-        localStorage.clear();
-        this.loadSettings();
-        // 关闭对话框
-        this.resetDialogVisible = false;
+      localStorage.clear();
+      this.loadSettings();
+      // 关闭对话框
+      this.resetDialogVisible = false;
     },
     createPython(value) {
       this.tmpPythonPaths.push({
@@ -431,5 +370,58 @@ export default {
 
 * {
   font-family: "Arial", sans-serif;
+}
+
+.header-drawer-container {
+  position: relative;
+  /* 使用更平滑的 cubic-bezier 曲线 */
+  transition: margin-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0;
+  z-index: 1000;
+}
+
+.header-drawer-container.is-collapsed {
+  margin-top: calc(-1 * var(--td-comp-size-xxxl));
+}
+
+/* 拉手样式优化 */
+.drawer-handle {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  /* 默认往上藏一点 */
+  width: 56px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid var(--td-component-stroke);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  /* 关键：初始状态为透明，且不可点击 */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 当 Header 折叠时，拉手显现 */
+.is-collapsed .drawer-handle {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  /* 回落到正常位置 */
+  /* 延迟显示，等 Header 差不多收回去了再出现，视觉更高级 */
+  transition-delay: 0.2s;
+}
+
+.drawer-handle:hover {
+  background: var(--td-bg-color-container-hover);
+  height: 28px;
+  /* 悬停时稍微拉长一点，增加反馈感 */
 }
 </style>

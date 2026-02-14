@@ -11,7 +11,7 @@ const router = createRouter({
     routes: [ //一个个的路由规则
         {
             path: '/home',
-            component: () => import('@/views/Home/Home.vue'),
+            component: () => import('@/views/HomeEx/HomeEx.vue'),
         }, {
             path: '/h5view',
             component: () => import('@/views/H5View/H5View.vue'),
