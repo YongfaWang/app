@@ -3,7 +3,7 @@
     <t-header v-if="isHiddenExecute" style="flex-shrink: 0;">
       <span style="font-size: 13pt; font-weight: bold">{{ title }}</span>
     </t-header>
-    <t-content style="flex: 1; min-height: 0; background: white;">
+    <t-content style="flex: 1; min-height: 0; background: var(--td-bg-color-container);">
       <div style="padding: 15px; height: calc(100% - 30px); display: flex; flex-direction: column;">
         <!-- 表单区域，设置可滚动 -->
         <div style="flex: 1; min-height: 0; overflow-y: auto; margin-bottom: 20px;">

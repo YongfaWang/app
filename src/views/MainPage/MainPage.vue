@@ -158,6 +158,15 @@
               </template>
             </t-input>
           </div>
+          <!-- 主题选择 -->
+          <div class="row">
+            <div class="col">
+              <t-select label="Dark Mode" v-model="settingConfig.themeMode" :options="[
+                { label: 'Light', value: 'light' },
+                { label: 'Dark', value: 'dark' }
+              ]" />
+            </div>
+          </div>
         </div>
       </template>
     </t-dialog>
@@ -240,7 +249,8 @@ export default {
       window.electronAPI.quit(); // 通知主进程关闭窗口
     },
     applySetting() {
-      // this.settingConfig.darkMode ? document.documentElement.setAttribute("theme-mode", "dark") : document.documentElement.removeAttribute("theme-mode");
+      document.documentElement.setAttribute("theme-mode", this.settingConfig.themeMode || "light")
+      // this.settingConfig.themeMode ? document.documentElement.setAttribute("theme-mode", "dark") : document.documentElement.removeAttribute("theme-mode");
     },
     async printTestInfo() {
       console.log("Test Info");
@@ -262,6 +272,7 @@ export default {
           JSON.stringify({
             pythonPath: "",
             homeDir: "",
+            themeMode: "light", // light or dark
           })
         );
         this.readSettings();
@@ -393,7 +404,7 @@ export default {
   /* 默认往上藏一点 */
   width: 56px;
   height: 24px;
-  background: #fff;
+  background: var(--td-bg-color-container);
   border: 1px solid var(--td-component-stroke);
   border-top: none;
   border-radius: 0 0 12px 12px;

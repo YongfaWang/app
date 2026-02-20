@@ -3,3 +3,8 @@ node_modules
 /dist
 build
 /dist_electron/lisa_sim
+h5_reader.spec
+__pycache__
+/dist_electron/index.js
+/dist_electron/preload.js
+/dist_electron/package.json

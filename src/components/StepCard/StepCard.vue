@@ -72,9 +72,9 @@ export default {
 .step-card {
     position: relative;
     width: 320px;
-    background-color: #12172b;
+    background-color: var(--yf-color-3);
     /* Dark navy background */
-    border: 1px solid #1e253c;
+    border: 1px solid #e7e7e7;
     border-radius: 12px;
     padding: 24px;
     color: #ffffff;
@@ -84,7 +84,7 @@ export default {
 }
 
 .step-card:hover {
-    border-color: #3e4d7c;
+    border-color: var(--yf-color-6);
     transform: translateY(-2px);
 }
 
@@ -93,9 +93,9 @@ export default {
     position: absolute;
     top: 12px;
     right: 12px;
-    background-color: #55c3c3;
+    background-color: var(--yf-color-7);
     /* Teal color from image */
-    color: #000;
+    color: var(--yf-color-3);
     font-size: 11px;
     font-weight: bold;
     padding: 2px 10px;
@@ -105,6 +105,7 @@ export default {
 
 /* Title Styling */
 .card-title {
+    color: var(--yf-color-2);
     font-size: 20px;
     margin: 0 0 16px 0;
     font-weight: 600;
@@ -135,15 +136,15 @@ export default {
     padding: 4px 12px;
     border: 1px solid rgba(85, 195, 195, 0.3);
     background-color: rgba(85, 195, 195, 0.1);
-    color: #55c3c3;
+    color: var(--yf-color-7);
     border-radius: 16px;
     white-space: nowrap;
 }
 
 /* Button Styling */
 .enter-btn {
-    background-color: transparent;
-    border: 1px solid #3e4d7c;
+    background-color: var(--yf-color-4);
+    border: 1px solid var(--yf-color-8);
     color: #ffffff;
     padding: 8px 16px;
     border-radius: 4px;
@@ -155,8 +156,8 @@ export default {
 }
 
 .enter-btn:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: #ffffff;
+    background-color: var(--yf-color-5);
+    /* border-color: var(--yf-color-6); */
 }
 
 .icon-suffix {

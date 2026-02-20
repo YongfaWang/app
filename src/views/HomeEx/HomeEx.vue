@@ -1,7 +1,7 @@
 <template>
   <div class="home-ex-container">
     <div class="content-wrapper">
-      
+
       <div class="header-section">
         <h1 class="main-title">引力波卫星仿真与数据分析平台</h1>
         <p class="sub-title">轨道 · 信号 · 噪声 · 数据可视化的一体化仿真流程</p>
@@ -9,16 +9,9 @@
 
       <div class="cards-section">
         <div class="cards-grid">
-          <StepCard 
-            v-for="(card, index) in stepCards" 
-            :key="index" 
-            :stepText="card.stepText" 
-            :title="card.title"
-            :description="card.description" 
-            :tags="card.tags" 
-            @on-click="handleModuleClick(card.title)"
-            class="grid-item" 
-          />
+          <StepCard v-for="(card, index) in stepCards" :key="index" :stepText="card.stepText" :title="card.title"
+            :description="card.description" :tags="card.tags" @on-click="handleModuleClick(card.title)"
+            class="grid-item" />
         </div>
       </div>
 
@@ -27,7 +20,7 @@
           <div class="chart-header">示例: 轨道距离变化</div>
           <div ref="chart1" class="echart-instance"></div>
         </div>
-        
+
         <div class="chart-wrapper">
           <div class="chart-header">示例: 引力波信号 + 噪声</div>
           <div ref="chart2" class="echart-instance"></div>
@@ -115,7 +108,7 @@ export default {
     initChart1() {
       const chartDom = this.$refs.chart1;
       this.chartInstance1 = echarts.init(chartDom);
-      
+
       // Generate some dummy sine wave data
       const data = [];
       for (let i = 0; i < 50; i++) {
@@ -127,14 +120,14 @@ export default {
         grid: { top: 40, right: 20, bottom: 20, left: 60, containLabel: true },
         tooltip: { trigger: 'axis' },
         legend: { data: ['Inter-satellite Distance (km)'], textStyle: { color: '#ccc' } },
-        xAxis: { 
-          type: 'value', 
+        xAxis: {
+          type: 'value',
           splitLine: { show: false },
           axisLabel: { color: '#888' }
         },
-        yAxis: { 
-          type: 'value', 
-          min: 'dataMin', 
+        yAxis: {
+          type: 'value',
+          min: 'dataMin',
           splitLine: { lineStyle: { color: '#333', type: 'dashed' } },
           axisLabel: { color: '#888' }
         },
@@ -167,13 +160,13 @@ export default {
         grid: { top: 40, right: 20, bottom: 20, left: 60, containLabel: true },
         tooltip: { trigger: 'axis' },
         legend: { data: ['GW + Noise'], textStyle: { color: '#ccc' } },
-        xAxis: { 
-          type: 'value', 
+        xAxis: {
+          type: 'value',
           splitLine: { show: false },
           axisLabel: { color: '#888' }
         },
-        yAxis: { 
-          type: 'value', 
+        yAxis: {
+          type: 'value',
           splitLine: { lineStyle: { color: '#333', type: 'dashed' } },
           axisLabel: { color: '#888' }
         },
@@ -202,12 +195,19 @@ export default {
 */
 .home-ex-container {
   width: 100%;
-  height: 100%; /* Fills the parent height */
-  background-color: #0b0f19; /* Dark background from image */
-  overflow-y: auto; /* Enable vertical scrolling */
+  height: 100%;
+  /* Fills the parent height */
+  background-color: var(--yf-color-1);
+  /* Dark background from image */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
   overflow-x: hidden;
   color: #ffffff;
   box-sizing: border-box;
+}
+
+.grid-item {
+  box-shadow: 0 2px 8px var(--yf-shadow-color-1);
 }
 
 /* 2. Custom Scrollbar Styling 
@@ -219,12 +219,14 @@ export default {
 }
 
 .home-ex-container::-webkit-scrollbar-track {
-  background: transparent; /* Remove background */
+  background: transparent;
+  /* Remove background */
 }
 
 .home-ex-container::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 4px;
+  /* Rounded corners */
 }
 
 .home-ex-container::-webkit-scrollbar-thumb:hover {
@@ -234,7 +236,8 @@ export default {
 /* Content Wrapper to add padding */
 .content-wrapper {
   padding: 40px;
-  max-width: 1600px; /* Prevent it from getting too wide on huge screens */
+  max-width: 1600px;
+  /* Prevent it from getting too wide on huge screens */
   margin: 0 auto;
 }
 
@@ -244,6 +247,7 @@ export default {
   margin-bottom: 50px;
 
   .main-title {
+    color: var(--yf-color-2);
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 12px;
@@ -252,7 +256,7 @@ export default {
 
   .sub-title {
     font-size: 16px;
-    color: #8c9ba5;
+    color: var(--td-text-color-secondary);
     letter-spacing: 1px;
   }
 }
@@ -269,21 +273,24 @@ export default {
 /* Charts Section Layout */
 .charts-section {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping */
+  flex-wrap: wrap;
+  /* Allows wrapping */
   gap: 24px;
   width: 100%;
 }
 
 .chart-wrapper {
-  background: #131824; /* Slightly lighter card bg */
+  background: var(--yf-color-3);
+  /* Slightly lighter card bg */
   border-radius: 12px;
   border: 1px solid #1f2738;
   padding: 20px;
   box-sizing: border-box;
-  
+
   /* Flex magic for responsiveness */
-  flex: 1; 
-  min-width: 500px; /* If space < 500px, it wraps to next line */
+  flex: 1;
+  min-width: 500px;
+  /* If space < 500px, it wraps to next line */
   height: 350px;
   display: flex;
   flex-direction: column;
@@ -315,7 +322,7 @@ export default {
 .footer {
   margin-top: 60px;
   text-align: center;
-  color: #4a5568;
+  color: var(--td-text-color-secondary);
   font-size: 12px;
 }
 </style>

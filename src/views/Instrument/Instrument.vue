@@ -185,7 +185,7 @@ export default {
 
 .log-actions {
   flex-shrink: 0;
-  background: white;
+  background: var(--td-bg-color-container);
   padding: 20px;
   display: flex;
   justify-content: flex-end;
