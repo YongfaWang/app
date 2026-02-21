@@ -18,7 +18,8 @@
             </div>
             <!-- Action Button -->
             <button class="enter-btn" @click="handleBtnClick">
-                进入模块
+                <!-- 进入模块 -->
+                Enter Module
                 <!-- Example usage of TDesign Icons -->
                 <chevron-right-icon size="14px" class="icon-suffix" />
             </button>
@@ -62,7 +63,7 @@ export default {
     methods: {
         handleBtnClick() {
             // Emit an event to the parent component
-            this.$emit('on-click');
+            this.$emit('onClick');
         },
     },
 };
@@ -119,7 +120,9 @@ export default {
     color: #94a3b8;
     /* Muted grey text */
     margin-bottom: 20px;
-    min-height: 60px;
+    /* min-height: 83px; */
+    height: 83px;
+    text-align: left;
     /* Ensures consistent alignment */
 }
 

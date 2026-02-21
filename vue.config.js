@@ -16,6 +16,10 @@ module.exports = {
         } : {
           from: 'dist/h5_reader', // 项目根目录的路径
           to: 'h5_reader'    // 打包后在应用资源目录中的路径
+        },
+        {
+          from: 'public/help.md', // 项目根目录的路径
+          to: 'help.md'    // 打包后在应用资源目录中的路径
         }
 
         ],

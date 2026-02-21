@@ -8,3 +8,9 @@ __pycache__
 /dist_electron/index.js
 /dist_electron/preload.js
 /dist_electron/package.json
+/dist_electron/bundled
+/dist_electron/builder-effective-config.yaml
+/dist_electron/win-unpacked
+/dist_electron/*.exe*
+/dist_electron/builder-debug.yml
+/dist_electron/latest.yml

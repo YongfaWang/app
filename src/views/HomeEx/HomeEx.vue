@@ -10,8 +10,7 @@
       <div class="cards-section">
         <div class="cards-grid">
           <StepCard v-for="(card, index) in stepCards" :key="index" :stepText="card.stepText" :title="card.title"
-            :description="card.description" :tags="card.tags" @on-click="handleModuleClick(card.title)"
-            class="grid-item" />
+            :description="card.description" :tags="card.tags" @onClick="pageRouter(card.router)" class="grid-item" />
         </div>
       </div>
 
@@ -31,49 +30,86 @@
         © 2026 引力波卫星仿真平台 | 科研演示 / 教学 / 项目汇报
       </div>
     </div>
+    <div>
+      <t-dialog placement="center" v-model:visible="winconfig.workWeiget.isShow" :header="getCurrentWeightName"
+        :confirmBtn="null" :cancelBtn="null" width="90vw" :onClose="closeDialog" height="80vh" :footer="null">
+        <div style="height: 70vh; overflow: hidden;">
+          <H5View @onCancel="closeDialog" v-if="this.winconfig.flag === 'h5view'" />
+          <Glitchs @onCancel="closeDialog" v-else-if="this.winconfig.flag === 'glitchs'" />
+          <GWResponse @onCancel="closeDialog" v-else-if="this.winconfig.flag === 'gwresponse'" />
+          <Instrument @onCancel="closeDialog" v-else-if="this.winconfig.flag === 'instrument'" />
+          <Orbits @onCancel="closeDialog" v-else-if="this.winconfig.flag === 'orbits'" />
+        </div>
+      </t-dialog>
+    </div>
   </div>
 </template>
 
 <script>
 import * as echarts from 'echarts';
 import StepCard from '@/components/StepCard/StepCard';
-
+import H5View from '@/views/H5View/H5View';
+import Glitchs from '@/views/Glitchs/Glitchs';
+import GWResponse from '@/views/GWResponse/GWResponse';
+import Instrument from '@/views/Instrument/Instrument';
+import Orbits from '@/views/Orbits/Orbits';
 export default {
   name: 'HomeEx',
   components: {
-    StepCard
+    StepCard,
+    H5View,
+    Glitchs,
+    GWResponse,
+    Instrument,
+    Orbits
   },
   data() {
     return {
+      winconfig: {
+        workWeiget: {
+          isShow: false,
+          flag: ""
+        }
+      },
       stepCards: [
         {
           stepText: 'STEP 01',
-          title: '轨道生成',
-          description: '生成引力波卫星星座与航天器轨道，描述星间几何关系及其随时间演化。',
+          title: 'Orbits',
+          router: 'orbits',
+          // description: '生成引力波卫星星座与航天器轨道，描述星间几何关系及其随时间演化。',
+          description: 'Generate gravitational wave satellite constellations and spacecraft orbits, describe the geometric relationships between stars and their evolution over time.',
           tags: ['Orbit Dynamics', 'Constellation'],
         },
         {
           stepText: 'STEP 02',
-          title: '引力波生成',
-          description: '构建不同类型引力波源模型，模拟星间测量链路对引力波的响应。',
+          title: 'GW Response',
+          router: 'gwresponse',
+          // description: '构建不同类型引力波源模型，模拟星间测量链路对引力波的响应。',
+          description: 'Construct different types of gravitational wave source models and simulate the response of inter-satellite measurement links to gravitational waves.',
           tags: ['GW Source', 'Response'],
         },
         {
           stepText: 'STEP 03',
-          title: '激光毛刺 Glitches',
-          description: '模拟激光系统中的瞬态异常信号，对数据质量与TDI性能进行评估。',
+          title: 'Glitches',
+          router: 'glitchs',
+          // description: '模拟激光系统中的瞬态异常信号，对数据质量与TDI性能进行评估。',
+          description: 'Simulate transient anomalous signals in the laser system and evaluate data quality and TDI performance.',
           tags: ['Laser Glitch', 'Transient'],
         },
         {
           stepText: 'STEP 04',
-          title: '仪器噪声生成',
-          description: '构建加速度噪声、光学路径噪声与时钟噪声等关键误差源模型。',
+          title: 'Instrument',
+          router: 'instrument',
+          // description: '构建加速度噪声、光学路径噪声与时钟噪声等关键误差源模型。',
+          description: 'Construct key error source models such as acceleration noise, optical path noise, and clock noise.',
           tags: ['Instrument Noise', 'PSD'],
         },
         {
           stepText: 'STEP 05',
-          title: '数据绘图与展示',
-          description: '对仿真生成的观测量进行可视化展示，支持时域与频域分析。',
+          title: 'H5View',
+          router: 'h5view',
+          // description: '对仿真生成的观测量进行可视化展示，支持时域与频域分析。',
+          description: 'Visualize the simulated observation data and support time and frequency domain analysis.',
           tags: ['Visualization', 'Time & Frequency'],
         }
       ],
@@ -93,9 +129,30 @@ export default {
     if (this.chartInstance2) this.chartInstance2.dispose();
   },
   methods: {
-    handleModuleClick(title) {
-      console.log(`Module clicked: ${title}`);
-      // Add your navigation logic here
+    pageRouter(flag) {
+      this.winconfig.flag = flag
+      this.winconfig.workWeiget.isShow = true
+    },
+    closeDialog() {
+      console.log("关闭弹窗");
+
+      this.winconfig.flag = ''
+      this.winconfig.workWeiget.isShow = false
+    },
+
+    getCurrentWeightName() {
+      switch (this.winconfig.flag) {
+        case 'h5view':
+          return "H5View"
+        case 'glitchs':
+          return "Glitchs Configure"
+        case 'gwresponse':
+          return "GW Response Configure"
+        case 'instrument':
+          return "Instrument Configure"
+        case 'orbits':
+          return "Orbits Configure"
+      }
     },
     handleResize() {
       if (this.chartInstance1) this.chartInstance1.resize();

@@ -31,7 +31,11 @@
                 <template #icon><t-icon name="setting" /></template>
               </t-button>
             </t-tooltip>
-
+            <t-tooltip content="Help">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="helpDialogVisible = true">
+                <template #icon><t-icon name="help-circle" /></template>
+              </t-button>
+            </t-tooltip>
             <t-tooltip :content="isHeaderCollapsed ? '展开' : '收起'">
               <t-button variant="text" shape="square" @click="toggleHeader">
                 <template #icon><t-icon :name="isHeaderCollapsed ? 'chevron-down' : 'chevron-up'" /></template>
@@ -44,11 +48,12 @@
         </div>
       </t-header>
     </div>
-    <t-layout style="height: calc(100% - 64px)">
-      <t-aside style="border-top: 1px solid var(--component-border)">
+    <t-layout style="height: calc(100% - 64px); position: relative; overflow: hidden;">
+      <t-aside class="custom-aside" :class="{ 'is-hidden': isAsideHidden }"
+        style="border-top: 1px solid var(--component-border)">
         <!-- default-expanded="['2-1']" 默认展开Tools -->
-        <t-menu default-expanded="['2-1']" theme="light" v-model="currentMenu" :collapsed="collapsed"
-          @change="changeHandler">
+        <t-menu default-expanded="['2-1']" theme="light" v-model="currentMenu" @change="changeHandler">
+
           <!-- <template #logo>
           <img :width="collapsed ? 35 : 136" :src="iconUrl" alt="logo" />
         </template> -->
@@ -100,12 +105,23 @@
             </t-menu-item>
           </t-menu-group>
           <template #operations>
-            <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="quitDialogVisible = true">
-              <template #icon><t-icon name="login" /></template>
-            </t-button>
+            <t-tooltip content="收起菜单" placement="right">
+              <t-button variant="text" shape="square" @click="toggleAside">
+                <template #icon><t-icon name="menu-fold" /></template>
+              </t-button>
+            </t-tooltip>
+
+            <t-tooltip content="退出" placement="right">
+              <t-button class="t-demo-collapse-btn" variant="text" shape="square" @click="quitDialogVisible = true">
+                <template #icon><t-icon name="login" /></template>
+              </t-button>
+            </t-tooltip>
           </template>
         </t-menu>
       </t-aside>
+      <div class="aside-drawer-handle" :class="{ 'is-visible': isAsideHidden }" @click="toggleAside">
+        <t-icon name="chevron-right" size="16px" />
+      </div>
       <t-layout>
         <!-- 子页面 -->
         <t-content style="height: calc(100% - 64px);">
@@ -118,8 +134,7 @@
         <!-- <t-footer>Copyright @ 2019-{{ new Date().getFullYear() }} [---------------]. All Rights Reserved</t-footer> -->
       </t-layout>
     </t-layout>
-    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" cancel-btn="Cancel"
-      confirm-btn="OK" @confirm="saveSettings">
+    <t-dialog placement="center" v-model:visible="settingDialogVisible" header="Settings" @confirm="saveSettings">
       <template #footer>
         <div style="display: flex; justify-content: space-between; width: 100%">
           <t-button theme="default" variant="base" @click="resetDialogVisible = true">
@@ -170,6 +185,20 @@
         </div>
       </template>
     </t-dialog>
+    <t-dialog placement="center" v-model:visible="helpDialogVisible" header="Help" @confirm="saveSettings">
+      <template #footer>
+        <div style="display: flex; justify-content: end; width: 100%">
+          <div>
+            <t-button theme="primary" variant="base" @click="helpDialogVisible = false" style="margin-left: 8px">
+              OK
+            </t-button>
+          </div>
+        </div>
+      </template>
+      <template #default>
+        <div v-html="markdown.render(markdownStr)"></div>
+      </template>
+    </t-dialog>
     <!-- 退出提示对话框 -->
     <t-dialog theme="danger" v-model:visible="quitDialogVisible" header="Tip" :confirm-btn="{
       content: 'Exit',
@@ -188,6 +217,7 @@
 </template>
 
 <script>
+import MarkdownIt from 'markdown-it';
 export default {
   name: "MainPage",
   components: {},
@@ -199,6 +229,7 @@ export default {
   data() {
     return {
       isHeaderCollapsed: false,
+      isAsideHidden: false,
       currentMenu: "home",
       settingConfig: {},
       collapsed: false,
@@ -206,17 +237,37 @@ export default {
       resetDialogVisible: false,
       quitDialogVisible: false,
       settingDialogVisible: false,
+      helpDialogVisible: false,
       iconUrl:
         "https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/site/logo%402x.png",
       isFullScreen: false,
+      markdownStr: "No help document available at the moment.",
     };
+  },
+  computed: {
+    markdown() {
+      return new MarkdownIt();
+    }
+  },
+  async mounted() {
+    this.markdownStr = await window.electronAPI.readResourcesFileToString(
+      "help.md"
+    );
   },
   methods: {
     toggleHeader() {
       this.isHeaderCollapsed = !this.isHeaderCollapsed;
     },
+    toggleAside() {
+      this.isAsideHidden = !this.isAsideHidden;
+    },
     fullscreen() {
       this.isFullScreen = !this.isFullScreen;
+      // 当进入全屏时，自动折叠 Header 和隐藏 Aside；退出全屏时不影响Header和Aside的状态，保持用户之前的设置
+      if (this.isFullScreen) {
+        this.isHeaderCollapsed = this.isFullScreen;
+        this.isAsideHidden = this.isFullScreen;
+      }
       window.electronAPI.fullScreen({ isFullScreen: this.isFullScreen }); // 通知主进程关闭窗口
     },
     handleItemClicked(flag) {
@@ -434,5 +485,63 @@ export default {
   background: var(--td-bg-color-container-hover);
   height: 28px;
   /* 悬停时稍微拉长一点，增加反馈感 */
+}
+
+
+/* --- 侧边栏隐藏动画 --- */
+.custom-aside {
+  /* TDesign 默认侧边栏宽度通常是 232px */
+  width: 232px;
+  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 0;
+  z-index: 1000;
+}
+
+/* 隐藏时，向左侧平移 232px 完全移出视口 */
+.custom-aside.is-hidden {
+  margin-left: -232px;
+}
+
+/* --- 侧边栏展开拉手样式 --- */
+.aside-drawer-handle {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  /* 初始状态往左边藏一点 */
+  transform: translateY(-50%) translateX(-10px);
+  width: 24px;
+  height: 56px;
+  background: var(--td-bg-color-container);
+  border: 1px solid var(--td-component-stroke);
+  border-left: none;
+  /* 贴紧左侧屏幕不需要边框 */
+  border-radius: 0 12px 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.08);
+
+  /* 默认隐藏并不可点击 */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+/* 侧边栏隐藏后，拉手显现 */
+.aside-drawer-handle.is-visible {
+  opacity: 1;
+  visibility: visible;
+  /* 回落到正常位置 */
+  transform: translateY(-50%) translateX(0);
+  transition-delay: 0.2s;
+  /* 延迟一下，等侧边栏收回去了再出现 */
+}
+
+.aside-drawer-handle:hover {
+  background: var(--td-bg-color-container-hover);
+  width: 28px;
+  /* 悬停时稍微拉宽一点增加反馈 */
 }
 </style>

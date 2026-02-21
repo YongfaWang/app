@@ -43,7 +43,6 @@ export default {
     return {
       homeDirInvalidDialog: false,
       isHiddenExecute: true,
-      iniContent: {},
       xmlContent: {},
       loading: false,
       runing: false,

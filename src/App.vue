@@ -33,6 +33,8 @@ export default {
   --yf-color-6: #ffffff;
   --yf-color-7: var(--yf-color-2);
   --yf-color-8: #3e4d7c;
+  --yf-color-9: #222222;
+  --yf-color-10: #111111;
 }
 
 :root[theme-mode="light"] {
@@ -45,6 +47,8 @@ export default {
   --yf-color-6: var(--yf-color-4);
   --yf-color-7: var(--yf-color-4);
   --yf-color-8: var(--yf-color-4);
+  --yf-color-9: #999999;
+  --yf-color-10: #777777;
   --td-gray-color-13: #FFFFFF;
 }
 

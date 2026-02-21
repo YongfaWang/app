@@ -13,6 +13,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('pythonEnd', (event, data) => callback(data)),
   readXml: (filePath) =>
     ipcRenderer.invoke('readXml', filePath),
+  readResourcesFileToString: (filePath) =>
+    ipcRenderer.invoke('readResourcesFileToString', filePath),
   removeAllListeners: (channel) =>
     ipcRenderer.removeAllListeners(channel),
   openH5Complete: (callback) =>

@@ -62,8 +62,8 @@ async function createWindow() {
   window = new BrowserWindow({
     width: 1200,
     height: 700,
-    minHeight: 650,
-    minWidth: 1150,
+    minHeight: 700,
+    minWidth: 1200,
     autoHideMenuBar: isShowMenu ? false : true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -255,7 +255,11 @@ ipcMain.handle('readXml', async (event, filePath) => {
   const dataStr = await parseXMLConfig(filePath);
   return dataStr;
 })
+ipcMain.handle('readResourcesFileToString', async (event, filePath) => {
 
+  var dataStr = await fs.promises.readFile(isDev ? path.resolve(__dirname, `../public/${filePath}`) : path.join(process.resourcesPath, filePath), "utf8")
+  return dataStr;
+})
 ipcMain.handle('readIni', async (event, filePath) => {
   try {
     const dataStr = await fs.promises.readFile(filePath, "utf8");
@@ -332,7 +336,7 @@ ipcMain.on('openH5', (event) => {
 // 查找系统中所有的python路径
 ipcMain.handle('searchPythonPaths', async () => {
   let cmd;
-  
+
   if (os.platform() === 'win32') {
     // Windows平台，使用where命令查找
     cmd = 'where.exe python';
@@ -371,7 +375,7 @@ ipcMain.handle('searchPythonPaths', async () => {
               .split('\n')
               .map(line => line.trim())
               .filter(line => line.includes('base') || line.includes('envs'));
-            
+
             paths = [...paths, ...condaPaths];  // 合并Conda路径
           }
 

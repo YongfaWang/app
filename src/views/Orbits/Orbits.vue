@@ -16,6 +16,14 @@
         </t-button>
       </div>
     </div>
+    <t-dialog v-model:visible="homeDirInvalidDialog" placement="center" theme="warning" header="Invalid"
+      :cancelBtn="null" :closeOnOverlayClick="false" :closeBtn="false" confirmBtn="OK"
+      @confirm="homeDirInvalidConfirmed">
+      <div style="text-align: left;">
+        Failed to read configuration file.<br />
+        Please check whether the lisa_sim directory is specified correctly and the files inside are complete.
+      </div>
+    </t-dialog>
   </div>
 </template>
 <script>

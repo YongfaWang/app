@@ -1,5 +1,5 @@
 <template>
-  <t-layout style="height: 100%; display: flex; flex-direction: column;">
+  <t-layout style="height: 100%; display: flex; flex-direction: column; border-radius: 10px; overflow: hidden;">
     <!-- 显示隐藏打开文件按钮 -->
     <t-header v-if="false" style="flex-shrink: 0;">
       <t-row>
@@ -279,6 +279,8 @@ export default {
   height: 100%;
   cursor: pointer;
   transition: background-color .3s;
+  border-radius: 10px;
+  border: .2rem dashed var(--yf-color-9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -291,12 +293,12 @@ export default {
 }
 
 .openfile:hover {
-  background-color: rgb(189, 189, 189);
+  background-color: var(--yf-color-9);
   transition: background-color .3s;
 }
 
 .openfile:active {
-  background-color: rgb(126, 126, 126);
+  background-color: var(--yf-color-10);
   transition: background-color .3s;
 }
 </style>
